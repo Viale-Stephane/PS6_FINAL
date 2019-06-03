@@ -22,5 +22,4 @@ l’élève est absent elle appuie alors sur “suivant” ce qui sort l’élè
 elle appuie sur le bouton pour confirmer la présence de l’élève au rendez-vous ce qui déclenche un compteur qui lorsque qu’il arrive à son terme sort l’élève actuel de la liste d’attente et informe automatiquement l’élève suivant par sms que son tour est venue
 si le rendez-vous se termine plus tôt que la fin du compteur elle peut appuyer sur suivant ce qui réinitialise le compteur et informe l’élève suivant par sms que c’est son tour 
 
-Scénario Etudiant :
-1) Vérifier ses SMS pour savoir quand il faut aller voir Mme Pinna : c'est à dire quand il reçoit un SMS de lui demande de venir de sa part.
+Scénario Etudiant : Vérifier ses SMS pour savoir quand il faut aller voir Mme Pinna : c'est à dire quand il reçoit un SMS de lui demande de venir de sa part.
