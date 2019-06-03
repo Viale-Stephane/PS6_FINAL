@@ -23,5 +23,4 @@ elle appuie sur le bouton pour confirmer la présence de l’élève au rendez-v
 si le rendez-vous se termine plus tôt que la fin du compteur elle peut appuyer sur suivant ce qui réinitialise le compteur et informe l’élève suivant par sms que c’est son tour 
 
 Scénario Etudiant :
-
-	1) Aller voir Mme.Pinna quand il reçoit le rendez-vous
+1) Vérifier ses SMS pour savoir quand il faut aller voir Mme Pinna : c'est à dire quand il reçoit un SMS de lui demande de venir de sa part.
