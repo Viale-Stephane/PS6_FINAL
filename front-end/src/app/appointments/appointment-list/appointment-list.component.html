@@ -1,0 +1,23 @@
+<div class="container text-center">
+  <ngb-datepicker #dp (select)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="collapsed" style="background-color: white;">
+  </ngb-datepicker>
+
+  <ng-template #t let-date let-focused="focused">
+  <span class="custom-day"
+        [class.focused]="focused"
+        [class.range]="isRange(date)"
+        [class.faded]="isHovered(date) || isInside(date)"
+        (mouseenter)="hoveredDate = date"
+        (mouseleave)="hoveredDate = null">
+    {{ date.day }}
+  </span>
+  </ng-template>
+
+</div>
+<div class="container" style="margin-top: 30px;">
+  <ng-container *ngFor="let appointment of appointmentList">
+    <ng-container *ngIf="filterAppointment(appointment, fromDate, toDate)">
+      <app-appointment [appointment]="appointment" (archiveAppointment)="archiveAppointment($event)" (joinAppointment)="joinAppointment($event)" (editAppointment)="editAppointment($event)"></app-appointment>
+    </ng-container>
+  </ng-container>
+</div>

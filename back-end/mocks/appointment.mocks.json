@@ -1,0 +1,65 @@
+[
+  {
+    "title": "Départ Togo",
+    "desc": "Pour les élèves souhaitant partir au Togo le second semestre de SI4",
+    "places": 8,
+    "date": "2019-05-15T22:00:00.000Z",
+    "startTime": "13:00",
+    "endTime": "15:00",
+    "teacherID": 1557762392882,
+    "studentsID": [],
+    "id": 1557764753947
+  },
+  {
+    "title": "Départ Chine",
+    "desc": "Pour les élèves souhaitant partir en Chine le second semestre de SI4",
+    "places": 8,
+    "date": "2019-05-29T22:00:00.000Z",
+    "startTime": "13:00",
+    "endTime": "15:00",
+    "teacherID": 1557762392882,
+    "studentsID": [
+      1554894622906,
+      1553715435658
+    ],
+    "id": 1557765574996
+  },
+  {
+    "title": "Départ Canada",
+    "desc": "Pour les élèves souhaitant partir au Canada le second semestre de SI4",
+    "places": 4,
+    "date": "2019-05-28T22:00:00.000Z",
+    "startTime": "10:00",
+    "endTime": "12:00",
+    "teacherID": 1557762392882,
+    "studentsID": [],
+    "id": 1557768815670
+  },
+  {
+    "title": "Départ Canada",
+    "desc": "Description : Pour les élèves souhaitant partir au Canada le second semestre de SI4",
+    "places": 4,
+    "date": "2019-05-26T22:00:00.000Z",
+    "startTime": "10:00",
+    "endTime": "12:00",
+    "teacherID": 1557762392882,
+    "studentsID": [
+      1553717759702,
+      1553717979587,
+      1553718502230,
+      1553718562028
+    ],
+    "id": 1557769215940
+  },
+  {
+    "title": "cours3",
+    "desc": "nhtd",
+    "places": 2,
+    "date": "2019-05-31T22:00:00.000Z",
+    "startTime": "01:01",
+    "endTime": "02:03",
+    "teacherID": 1553716028941,
+    "studentsID": [],
+    "id": 1558422836155
+  }
+]

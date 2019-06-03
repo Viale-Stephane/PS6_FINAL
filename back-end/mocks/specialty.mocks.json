@@ -1,0 +1,38 @@
+[
+  {
+    "title": "Interface Homme Machine",
+    "abr": "ihm",
+    "description": "Spécialité IHM",
+    "id": 1556334087881
+  },
+  {
+    "title": "Cryptographie, sécurité et vie privée dans les applications et les réseaux",
+    "abr": "caspar",
+    "description": "Spécialité CASPAR",
+    "id": 1557767680766
+  },
+  {
+    "title": "Intelligence Ambiante",
+    "abr": "iam",
+    "description": "Spécialité IAM",
+    "id": 1557767721929
+  },
+  {
+    "title": "Sciences, Technologies, Ressources et Applications du Web ",
+    "abr": "web",
+    "description": "Spécialité WEB",
+    "id": 1557768084085
+  },
+  {
+    "title": "Architecture Logicielle",
+    "abr": "al",
+    "description": "Spécialité AL",
+    "id": 1557768181152
+  },
+  {
+    "title": "Informatique et Mathématiques Appliquées à la Finance et à l'Assurance",
+    "abr": "imafa",
+    "description": "Spécialité IMAFA",
+    "id": 1557768233057
+  }
+]

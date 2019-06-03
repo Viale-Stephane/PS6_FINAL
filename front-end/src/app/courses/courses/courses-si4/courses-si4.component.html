@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 text-center">
+        <button type="button" [routerLink]="['/courses/coursesSI3']"  class="h-100 btn btn-outline btn-lg btn-block navButton"><i class="fas fa-chevron-left"></i> SI3</button>
+      </div>
+      <div class="col-md-6 text-center">
+        <button type="button" [routerLink]="['/courses/coursesSI5']"  class="h-100 btn btn-outline btn-lg btn-block navButton">SI5 <i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row align-items-center text-center" style="height: 80vh">
+    <div class="h-100 col-3">
+      <h2>S7 ({{courseService.getEctsSemester('7')}} ects)</h2>
+      <div *ngFor="let course of courseList">
+        <div *ngIf="course.year === '7'">
+          <button type="button" class="h-10 btn btn-outline btn-lg btn-block infoButton"  id = {{course.title}} (click) = clickCourseButton()>{{course.title}}</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 h-100">
+      <div *ngIf="courseClicked == null">
+        <div *ngIf="currentUser?.professor === true">
+          <button type="button" class="h-10 btn btn-outline btn-lg btn-block addButton" (click) = clickNewCourseButton()>Ajouter un cours</button>
+        </div>
+      </div>
+      <div *ngIf="wantToCreate === false && courseClicked !== null">
+        <app-course-details [course]=getClickedCourse()></app-course-details>
+        <div *ngIf="currentUser?.professor === true">
+          <button type="button" class="h-10 btn btn-outline btn-lg btn-block addButton" (click) = clickNewCourseButton()>Ajouter un cours</button>
+        </div>
+        <div *ngIf="wantToModify === false  && currentUser?.professor === true">
+          <button type="button" class="btn btn-primary modifyButton" (click)="clickModifyCourseButton()">Modifier</button>
+          <button type="button" class="btn btn-primary" (click)=deleteCourse()>Supprimer</button>
+        </div>
+        <div *ngIf="wantToModify === true && currentUser?.professor === true">
+          <button type="button" class="btn btn-primary modifyButton" (click)="clickModifyCourseButton()">Cacher</button>
+          <button type="button" class="btn btn-primary" (click)=deleteCourse()>Supprimer</button>
+        </div>
+      </div>
+      <div *ngIf="wantToCreate === true  && currentUser?.professor === true">
+        <app-course-empty></app-course-empty>
+      </div>
+      <div *ngIf="wantToModify === true  && currentUser?.professor === true">
+        <app-course-modify [course]=getCourseToModify() (updateCourse)="updateCourse($event)"></app-course-modify>
+      </div>
+    </div>
+    <div class="col-3 h-100">
+      <h2>S8 ({{courseService.getEctsSemester('8')}} ects)</h2>
+      <div *ngFor="let course of courseList">
+        <div *ngIf="course.year === '8'">
+          <button type="button" class="h-10 btn btn-outline btn-lg btn-block infoButton"  id = {{course.title}} (click) = clickCourseButton()>{{course.title}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

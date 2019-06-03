@@ -1,0 +1,336 @@
+[
+  {
+    "name": "Global",
+    "peopleInterested": [
+      1553715435658,
+      1553717759702,
+      1553717979587,
+      1553718502230,
+      1553718562028,
+      1553718563900,
+      1553718669457,
+      1553718927850,
+      1553718958696,
+      1553718977551,
+      1553719175023,
+      1553719186412,
+      1554491729778,
+      1554789641812,
+      1554894622906,
+      1554896718844,
+      1554896836971,
+      1554896957969,
+      1554897038389
+    ],
+    "barChartData": [
+      {
+        "data": [
+          394,
+          384,
+          389,
+          403,
+          409,
+          413,
+          422
+        ],
+        "label": "Demande d'échange"
+      },
+      {
+        "data": [
+          24,
+          17,
+          23,
+          20,
+          27,
+          19,
+          22
+        ],
+        "label": "Échange acceptés"
+      }
+    ],
+    "id": 1
+  },
+  {
+    "name": "Hong Kong",
+    "peopleInterested": [
+      1557773749725
+    ],
+    "barChartData": [
+      {
+        "data": [
+          49,
+          52,
+          41,
+          55,
+          47,
+          49,
+          55
+        ],
+        "label": "Demande d'échange"
+      },
+      {
+        "data": [
+          3,
+          1,
+          2,
+          2,
+          5,
+          1,
+          2
+        ],
+        "label": "Échange acceptés"
+      }
+    ],
+    "id": 2
+  },
+  {
+    "name": "Pologne",
+    "peopleInterested": [
+      null
+    ],
+    "barChartData": [
+      {
+        "data": [
+          50,
+          45,
+          55,
+          45,
+          41,
+          58,
+          59
+        ],
+        "label": "Demande d'échange"
+      },
+      {
+        "data": [
+          4,
+          2,
+          1,
+          2,
+          3,
+          1,
+          3
+        ],
+        "label": "Échange acceptés"
+      }
+    ],
+    "id": 3
+  },
+  {
+    "name": "Danemark",
+    "peopleInterested": [],
+    "barChartData": [
+      {
+        "data": [
+          42,
+          50,
+          47,
+          52,
+          52,
+          47,
+          54
+        ],
+        "label": "Demande d'échange"
+      },
+      {
+        "data": [
+          4,
+          1,
+          4,
+          1,
+          5,
+          1,
+          1
+        ],
+        "label": "Échange acceptés"
+      }
+    ],
+    "id": 4
+  },
+  {
+    "name": "Finlande",
+    "peopleInterested": [],
+    "barChartData": [
+      {
+        "data": [
+          42,
+          56,
+          53,
+          47,
+          53,
+          59,
+          50
+        ],
+        "label": "Demande d'échange"
+      },
+      {
+        "data": [
+          3,
+          1,
+          4,
+          1,
+          3,
+          1,
+          3
+        ],
+        "label": "Échange acceptés"
+      }
+    ],
+    "id": 5
+  },
+  {
+    "name": "Suède",
+    "peopleInterested": [],
+    "barChartData": [
+      {
+        "data": [
+          59,
+          43,
+          59,
+          52,
+          56,
+          60,
+          56
+        ],
+        "label": "Demande d'échange"
+      },
+      {
+        "data": [
+          1,
+          1,
+          2,
+          4,
+          2,
+          5,
+          3
+        ],
+        "label": "Échange acceptés"
+      }
+    ],
+    "id": 6
+  },
+  {
+    "name": "Suède 2",
+    "peopleInterested": [],
+    "barChartData": [
+      {
+        "data": [
+          49,
+          57,
+          40,
+          56,
+          57,
+          41,
+          48
+        ],
+        "label": "Demande d'échange"
+      },
+      {
+        "data": [
+          3,
+          5,
+          4,
+          4,
+          5,
+          3,
+          5
+        ],
+        "label": "Échange acceptés"
+      }
+    ],
+    "id": 7
+  },
+  {
+    "name": "Belgique",
+    "peopleInterested": [],
+    "barChartData": [
+      {
+        "data": [
+          56,
+          41,
+          43,
+          47,
+          46,
+          59,
+          41
+        ],
+        "label": "Demande d'échange"
+      },
+      {
+        "data": [
+          3,
+          2,
+          3,
+          4,
+          1,
+          5,
+          4
+        ],
+        "label": "Échange acceptés"
+      }
+    ],
+    "id": 8
+  },
+  {
+    "name": "Canada",
+    "peopleInterested": [],
+    "barChartData": [
+      {
+        "data": [
+          47,
+          40,
+          51,
+          49,
+          57,
+          40,
+          59
+        ],
+        "label": "Demande d'échange"
+      },
+      {
+        "data": [
+          8,
+          9,
+          8,
+          7,
+          8,
+          7,
+          6
+        ],
+        "label": "Échange acceptés"
+      }
+    ],
+    "id": 9
+  },
+  {
+    "name": "Chine",
+    "peopleInterested": 0,
+    "barChartData": [
+      {
+        "data": [
+          47,
+          40,
+          51,
+          49,
+          57,
+          40,
+          59
+        ],
+        "label": "Demande d'échange"
+      },
+      {
+        "data": [
+          3,
+          4,
+          3,
+          2,
+          3,
+          2,
+          1
+        ],
+        "label": "Échange acceptés"
+      }
+    ],
+    "id": 10
+  }
+]

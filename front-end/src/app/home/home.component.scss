@@ -1,0 +1,23 @@
+.content {
+    display: flex;
+  }
+
+
+
+  button{
+    background: rgba(255,255,255,0.6);
+  }
+
+  button:hover{
+    background: rgba(255,255,255,0.5)
+  }
+
+  app-ticket-form {
+    margin-left: 1em;
+  }
+
+  app-ticket-list {
+    flex: 1;
+  }
+
+

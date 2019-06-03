@@ -1,0 +1,16 @@
+<div class="container">
+  <div *ngIf="getProf() == false">
+    <h2>{{specialty?.title}}</h2>
+    <p>{{specialty?.description}} &nbsp;</p>
+  </div>
+  <div *ngIf="getProf() == true">
+    <app-specialty-modify [specialty]="specialty" (updateSpecialty)="updateSpecialty($event)"></app-specialty-modify>
+  </div>
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 text-center">
+      <button type="button" class="h-15 btn btn-outline btn-lg btn-block infoButton" [routerLink]="['/courses', '5',specialty.abr]">Consultez les cours</button>
+    </div>
+  </div>
+</div>
+

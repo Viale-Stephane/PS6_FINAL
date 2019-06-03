@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-center">
+                <button type="button" [routerLink]="['/courses/4']"  class="h-100 btn btn-outline btn-lg btn-block navButton"><i class="fas fa-chevron-left"></i> SI4</button>
+            </div>
+            <div class="col-md-6"></div>
+        </div>
+    </div>
+  <div class="row align-items-center text-center" style="height: 80vh">
+      <div class="h-100 col-12">
+          <h2>Choix de la spécialité : </h2>
+          <div *ngIf="getProf()=== true">
+            <div class="row" *ngFor="let specialty of specialtyList">
+               <div class="container infoDiv">
+                   <div class="row">
+                       <div class="col-md-9">
+                            <button type="button" class="h-15 btn btn-outline btn-lg btn-block infoButton" [routerLink]="['specialties', getAbr(specialty)]">{{specialty.title}} ({{specialty.abr}})</button>
+                          </div>
+                          <div class="col-md-3">
+                              <button type="button" class="h-15 btn btn-outline btn-lg btn-block btn-danger" (click)="deleteSpe(specialty)">Delete</button>
+                          </div>
+                      </div>
+
+                  </div>
+            </div>
+          </div>
+          <div *ngIf="getProf()=== false">
+              <div class="row" *ngFor="let specialty of specialtyList">
+                  <div class="container infoDiv">
+                      <div class="row">
+                          <div class="col-md-12">
+                              <button type="button" class="h-15 btn btn-outline btn-lg btn-block infoButton" [routerLink]="['specialties', getAbr(specialty)]">{{specialty.title}} ({{specialty.abr}})</button>
+                          </div>
+                      </div>
+
+                  </div>
+              </div>
+          </div>
+      <div *ngIf="getProf() === true">
+        <button type="button" class="h-15 btn btn-outline btn-lg btn-block addButton" [routerLink]="['/addSpecialty']">Ajouter une spécialité</button>
+      </div>
+    </div>
+  </div>
+</div>

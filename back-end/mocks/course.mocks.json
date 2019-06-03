@@ -1,0 +1,583 @@
+[
+  {
+    "title": "Anglais S5",
+    "description": "Un cours d'anglais",
+    "ects": "3",
+    "hour": "26",
+    "year": "5",
+    "courseConc": [
+      1553586057632
+    ],
+    "id": 1553586057632,
+    "optional": "0"
+  },
+  {
+    "title": "S9",
+    "ects": "3",
+    "hour": "20",
+    "year": "9",
+    "description": "zvzce",
+    "optional": "0",
+    "spe": "ihm",
+    "courseConc": [
+      1555182177578
+    ],
+    "id": 1555182177578
+  },
+  {
+    "title": "S10",
+    "ects": "10",
+    "hour": "20",
+    "year": "10",
+    "spe": "ihm",
+    "description": "Un test du s10",
+    "optional": "0",
+    "courseConc": [
+      -1
+    ],
+    "id": 1555942203176
+  },
+  {
+    "title": "SSII",
+    "ects": "3",
+    "hour": "20",
+    "year": "6",
+    "spe": "aucun",
+    "description": "Test",
+    "optional": "1",
+    "courseConc": [
+      1556006084693,
+      1556005751318
+    ],
+    "id": 1556005751318
+  },
+  {
+    "title": "TASD",
+    "ects": "3",
+    "hour": "20",
+    "year": "6",
+    "spe": "aucun",
+    "description": "test",
+    "optional": "1",
+    "courseConc": [
+      1556006084693,
+      1556005751318
+    ],
+    "id": 1556006084693
+  },
+  {
+    "title": "Architecture et réseaux",
+    "ects": "4",
+    "hour": "53",
+    "year": "5",
+    "spe": "aucun",
+    "description": "Un cours de Architecture et réseaux",
+    "optional": "0",
+    "courseConc": [
+      1556604749587
+    ],
+    "id": 1556604749587
+  },
+  {
+    "title": "Base de données",
+    "ects": "4",
+    "hour": "48h30",
+    "year": "5",
+    "spe": "aucun",
+    "description": "Un cours de Base de données",
+    "optional": "0",
+    "courseConc": [
+      1556604810416
+    ],
+    "id": 1556604810416
+  },
+  {
+    "title": "Communication",
+    "ects": "2",
+    "hour": "24",
+    "year": "5",
+    "spe": "aucun",
+    "description": "Un cours de Communication",
+    "optional": "0",
+    "courseConc": [
+      1556604841190
+    ],
+    "id": 1556604841190
+  },
+  {
+    "title": "Connaissance Entreprise 1",
+    "ects": "1",
+    "hour": "12",
+    "year": "5",
+    "spe": "aucun",
+    "description": "Un cours de Connaissance Entreprise",
+    "optional": "0",
+    "courseConc": [
+      1556604957032
+    ],
+    "id": 1556604957032
+  },
+  {
+    "title": "Informatique Théorique",
+    "ects": "4",
+    "hour": "50h30",
+    "year": "5",
+    "spe": "aucun",
+    "description": "Un cours de Informatique Théorique",
+    "optional": "0",
+    "courseConc": [
+      1556604980159
+    ],
+    "id": 1556604980159
+  },
+  {
+    "title": "Programmation Orientée Objet",
+    "ects": "4",
+    "hour": "52",
+    "year": "5",
+    "spe": "aucun",
+    "description": "Un cours de Programmation Orientée Objet",
+    "optional": "0",
+    "courseConc": [
+      1556605012885
+    ],
+    "id": 1556605012885
+  },
+  {
+    "title": "Programmation Procédurale",
+    "ects": "4",
+    "hour": "49",
+    "year": "5",
+    "spe": "aucun",
+    "description": "Un cours de Programmation Procédurale",
+    "optional": "0",
+    "courseConc": [
+      1556605046859
+    ],
+    "id": 1556605046859
+  },
+  {
+    "title": "Projet Semestre 5",
+    "ects": "4",
+    "hour": "104h45",
+    "year": "5",
+    "spe": "aucun",
+    "description": "Un cours de Projet Semestre 5",
+    "optional": "0",
+    "courseConc": [
+      1556605120875
+    ],
+    "id": 1556605120875
+  },
+  {
+    "title": "Programmation Système",
+    "ects": "4",
+    "hour": "39",
+    "year": "6",
+    "spe": "aucun",
+    "description": "Un cours de Programmation Système",
+    "optional": "0",
+    "courseConc": [
+      1556605293175
+    ],
+    "id": 1556605293175
+  },
+  {
+    "title": "Anglais S6",
+    "ects": "2",
+    "hour": "21",
+    "year": "6",
+    "spe": "aucun",
+    "description": "Un cours de Anglais",
+    "optional": "0",
+    "courseConc": [
+      1556605312144
+    ],
+    "id": 1556605312144
+  },
+  {
+    "title": "Algo et Structures de données",
+    "ects": "4",
+    "hour": "37h30",
+    "year": "6",
+    "spe": "aucun",
+    "description": "Un cours de Algo et Structures de données",
+    "optional": "0",
+    "courseConc": [
+      1556605351971
+    ],
+    "id": 1556605351971
+  },
+  {
+    "title": "Projet Semestre 6",
+    "ects": "4",
+    "hour": "46",
+    "year": "6",
+    "spe": "aucun",
+    "description": "Un cours de Projet Semestre 6",
+    "optional": "0",
+    "courseConc": [
+      1556605380030
+    ],
+    "id": 1556605380030
+  },
+  {
+    "title": "Informatique Théorique 2",
+    "ects": "3",
+    "hour": "36h30",
+    "year": "6",
+    "spe": "aucun",
+    "description": "Un cours de Informatique Théorique 2",
+    "optional": "1",
+    "courseConc": [
+      1557767142305,
+      1556605435532
+    ],
+    "id": 1556605435532
+  },
+  {
+    "title": "Interface Homme Machine",
+    "ects": "4",
+    "hour": "36h30",
+    "year": "6",
+    "spe": "aucun",
+    "description": "Un cours de Interface Homme Machine",
+    "optional": "0",
+    "courseConc": [
+      1556605463038
+    ],
+    "id": 1556605463038
+  },
+  {
+    "title": "Connaissance Entreprise 2",
+    "ects": "2",
+    "hour": "22",
+    "year": "6",
+    "spe": "aucun",
+    "description": "Un cours de Connaissance Entreprise",
+    "optional": "0",
+    "courseConc": [
+      1556605524892
+    ],
+    "id": 1556605524892
+  },
+  {
+    "title": "Anglais S7",
+    "ects": "3",
+    "hour": "20",
+    "year": "7",
+    "spe": "aucun",
+    "description": "Un cours de Anglais S7",
+    "optional": "0",
+    "courseConc": [
+      1557766378785
+    ],
+    "id": 1557766378785
+  },
+  {
+    "title": "Gestion d'entreprise",
+    "ects": "2",
+    "hour": "20",
+    "year": "7",
+    "spe": "aucun",
+    "description": "Un cours de Gestion d'entreprise",
+    "optional": "0",
+    "courseConc": [
+      1557766399104
+    ],
+    "id": 1557766399104
+  },
+  {
+    "title": "Langages et documents",
+    "ects": "4",
+    "hour": "35",
+    "year": "7",
+    "spe": "aucun",
+    "description": "Un cours de Langages et documents",
+    "optional": "1",
+    "courseConc": [
+      1557766452283,
+      1557766431726
+    ],
+    "id": 1557766431726
+  },
+  {
+    "title": "Sécurité Logicielle",
+    "ects": "4",
+    "hour": "35",
+    "year": "7",
+    "spe": "aucun",
+    "description": "Un cours de Sécurité Logicielle",
+    "optional": "1",
+    "courseConc": [
+      1557766452283,
+      1557766431726
+    ],
+    "id": 1557766452283
+  },
+  {
+    "title": "Machine Learning",
+    "ects": "4",
+    "hour": "35",
+    "year": "7",
+    "spe": "aucun",
+    "description": "Un cours de Machine Learning",
+    "optional": "0",
+    "courseConc": [
+      1557766544974
+    ],
+    "id": 1557766544974
+  },
+  {
+    "title": "Conception Logicielle",
+    "ects": "4",
+    "hour": "35",
+    "year": "7",
+    "spe": "aucun",
+    "description": "Un cours de Conception Logicielle",
+    "optional": "0",
+    "courseConc": [
+      1557766579777
+    ],
+    "id": 1557766579777
+  },
+  {
+    "title": "Finite state machine",
+    "ects": "4",
+    "hour": "35",
+    "year": "7",
+    "spe": "aucun",
+    "description": "Un cours de Finite state machine",
+    "optional": "0",
+    "courseConc": [
+      1557766608446
+    ],
+    "id": 1557766608446
+  },
+  {
+    "title": "Programmation multi paradigme",
+    "ects": "4",
+    "hour": "35",
+    "year": "7",
+    "spe": "aucun",
+    "description": "Un cours de Programmation multi paradigme",
+    "optional": "0",
+    "courseConc": [
+      1557766647369
+    ],
+    "id": 1557766647369
+  },
+  {
+    "title": "Algorithme et Complexité",
+    "ects": "4",
+    "hour": "35",
+    "year": "7",
+    "spe": "aucun",
+    "description": "Un cours de Algorithme et Complexité",
+    "optional": "0",
+    "courseConc": [
+      1557766680069
+    ],
+    "id": 1557766680069
+  },
+  {
+    "title": "Communication 2",
+    "ects": "2",
+    "hour": "20",
+    "year": "8",
+    "spe": "aucun",
+    "description": "Un cours de Communication 2",
+    "optional": "0",
+    "courseConc": [
+      1557766773426
+    ],
+    "id": 1557766773426
+  },
+  {
+    "title": "Programmation fonctionnelle et logique",
+    "ects": "4",
+    "hour": "35",
+    "year": "8",
+    "spe": "aucun",
+    "description": "Un cours de Programmation fonctionnelle et logique",
+    "optional": "0",
+    "courseConc": [
+      1557766796061
+    ],
+    "id": 1557766796061
+  },
+  {
+    "title": "Algorithme avancée",
+    "ects": "4",
+    "hour": "35",
+    "year": "8",
+    "spe": "aucun",
+    "description": "Un cours de Algorithme avancée",
+    "optional": "1",
+    "courseConc": [
+      1557766845499,
+      1557766817242
+    ],
+    "id": 1557766817242
+  },
+  {
+    "title": "Programmation parallèle",
+    "ects": "4",
+    "hour": "35",
+    "year": "8",
+    "spe": "aucun",
+    "description": "Un cours de Programmation parallèle",
+    "optional": "1",
+    "courseConc": [
+      1557766845499,
+      1557766817242
+    ],
+    "id": 1557766845499
+  },
+  {
+    "title": "Valorisation données",
+    "ects": "4",
+    "hour": "35",
+    "year": "8",
+    "spe": "aucun",
+    "description": "Un cours de Valorisation données",
+    "optional": "1",
+    "courseConc": [
+      1557766891598,
+      1557766865369
+    ],
+    "id": 1557766865369
+  },
+  {
+    "title": "Serv.Oriented Computing/WS",
+    "ects": "4",
+    "hour": "35",
+    "year": "8",
+    "spe": "aucun",
+    "description": "Un cours de Serv.Oriented Computing/WS",
+    "optional": "1",
+    "courseConc": [
+      1557766891598,
+      1557766865369
+    ],
+    "id": 1557766891598
+  },
+  {
+    "title": "Intro to Software Architecture",
+    "ects": "4",
+    "hour": "35",
+    "year": "8",
+    "spe": "aucun",
+    "description": "Un cours de Intro to Software Architecture",
+    "optional": "0",
+    "courseConc": [
+      1557766913639
+    ],
+    "id": 1557766913639
+  },
+  {
+    "title": "Réalité augmentée",
+    "ects": "4",
+    "hour": "35",
+    "year": "8",
+    "spe": "aucun",
+    "description": "Un cours de Réalité augmentée",
+    "optional": "0",
+    "courseConc": [
+      1557766931059
+    ],
+    "id": 1557766931059
+  },
+  {
+    "title": "ISLE",
+    "ects": "4",
+    "hour": "35",
+    "year": "8",
+    "spe": "aucun",
+    "description": "Un cours de ISLE",
+    "optional": "0",
+    "courseConc": [
+      1557766959401
+    ],
+    "id": 1557766959401
+  },
+  {
+    "title": "Capteurs/Actionneurs",
+    "ects": "4",
+    "hour": "35",
+    "year": "8",
+    "spe": "aucun",
+    "description": "Un cours de Capteurs/Actionneurs",
+    "optional": "1",
+    "courseConc": [
+      1557767010047,
+      1557766979289
+    ],
+    "id": 1557766979289
+  },
+  {
+    "title": "DevOps and Continous Testin",
+    "ects": "4",
+    "hour": "35",
+    "year": "8",
+    "spe": "aucun",
+    "description": "Un cours de DevOps and Continous Testin",
+    "optional": "1",
+    "courseConc": [
+      1557767010047,
+      1557766979289
+    ],
+    "id": 1557767010047
+  },
+  {
+    "title": "Génie Logiciel",
+    "ects": "3",
+    "hour": "35",
+    "year": "6",
+    "spe": "aucun",
+    "description": "Un cours de Génie Logiciel",
+    "optional": "1",
+    "courseConc": [
+      1557767142305,
+      1556605435532
+    ],
+    "id": 1557767142305
+  },
+  {
+    "title": "Stage Ouvrier",
+    "ects": "2",
+    "hour": "100",
+    "year": "6",
+    "spe": "aucun",
+    "description": "Un cours de Stage Ouvrier",
+    "optional": "0",
+    "courseConc": [
+      1557767207420
+    ],
+    "id": 1557767207420
+  },
+  {
+    "title": "LV2",
+    "ects": "2",
+    "hour": "20",
+    "year": "6",
+    "spe": "aucun",
+    "description": "Un cours de LV2",
+    "optional": "0",
+    "courseConc": [
+      -1
+    ],
+    "id": 1557767220180
+  },
+  {
+    "title": "Cours Concurrence G2",
+    "ects": "2",
+    "hour": "2",
+    "year": "5",
+    "spe": "aucun",
+    "description": "Un cours de Cours Concurrence G2",
+    "optional": "1",
+    "courseConc": [],
+    "id": 1557773248020
+  }
+]

@@ -1,0 +1,22 @@
+@import 'styles/variables';
+@import url('https://use.fontawesome.com/releases/v5.8.1/css/all.css');
+
+
+/* You can add global styles to this file, and also import other style files */
+
+html {
+  font: 500 20px/32px Roboto,"Helvetica Neue",sans-serif;
+}
+
+button {
+  font: 500 15px/24px Robot,"Helvetica Neue",sans-serif;
+}
+
+body {
+  margin: 0;
+  background: url('polytech-nice-sophia.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}

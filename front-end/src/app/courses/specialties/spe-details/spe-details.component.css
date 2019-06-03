@@ -1,0 +1,11 @@
+div{
+    background-color: antiquewhite;
+}
+.infoButton{
+    background-color: deepskyblue;
+    margin-bottom: 10px;
+}
+.infoButton:hover{
+    background-color: #00ace6;
+}
+

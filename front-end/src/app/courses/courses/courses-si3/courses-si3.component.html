@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6"></div>
+    <div class="col-md-6 text-center">
+      <button type="button" [routerLink]="['/courses/coursesSI4']"  class="h-100 btn btn-outline btn-lg btn-block navButton">SI4 <i class="fas fa-chevron-right"></i></button>
+    </div>
+  </div>
+  <br>
+  <div class="row align-items-center text-center" style="height: 80vh">
+    <div class="h-100 col-3">
+      <h2>S5 ({{courseService.getEctsSemester('5')}} ects)</h2>
+      <hr>
+      <div *ngFor="let courseS5 of sortedCourseList[5]">
+        <div *ngIf="courseS5.length > 1">
+          <hr>
+        </div>
+        <div *ngFor="let courseS5Sorted of courseS5">
+          <div *ngIf="courseS5Sorted?.optional === '0' || courseS5Sorted?.optional == null">
+              <button type="button" class="h-10 btn btn-outline btn-lg btn-block infoButton mandatory"  id = {{courseS5Sorted.title}} (click) = clickCourseButton()>{{courseS5Sorted.title}}</button>
+          </div>
+          <div *ngIf="courseS5Sorted?.optional === '1' && courseS5Sorted?.courseConc !== -1 && courseS5Sorted?.courseConc !== null">
+              <button type="button" class="h-10 btn btn-outline btn-lg btn-block infoButton optional"  id = {{courseS5Sorted.title}} (click) = clickCourseButton()>{{courseS5Sorted.title}}</button>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div>
+
+    <div class="col-6 h-100">
+      <div *ngIf="wantToCreate === false && courseClicked !== null">
+        <app-course-details [course]=getClickedCourse()></app-course-details>
+        <div *ngIf="currentUser?.professor === true">
+          <button type="button" class="h-10 btn btn-outline btn-lg btn-block addButton" (click) = clickNewCourseButton()>Ajouter un cours</button>
+        </div>
+        <div *ngIf="wantToModify === false  && currentUser?.professor === true">
+        <button type="button" class="btn btn-primary modifyButton" (click)="clickModifyCourseButton()">Modifier</button>
+        <button type="button" class="btn btn-primary" (click)=deleteCourse()>Supprimer</button>
+        </div>
+        <div *ngIf="wantToModify === true && currentUser?.professor === true">
+          <button type="button" class="btn btn-primary modifyButton" (click)="clickModifyCourseButton()">Cacher</button>
+          <button type="button" class="btn btn-primary" (click)=deleteCourse()>Supprimer</button>
+        </div>
+      </div>
+      <div *ngIf="wantToCreate === true  && currentUser?.professor === true">
+        <app-course-empty (addCourse)="addCourse($event)"></app-course-empty>
+      </div>
+      <div *ngIf="wantToModify === true  && currentUser?.professor === true">
+        <app-course-modify [course]=getCourseToModify() (updateCourse)="updateCourse($event)"></app-course-modify>
+      </div>
+    </div>
+    <div class="col-3 h-100">
+      <h2>S6 ({{courseService.getEctsSemester('6')}} ects)</h2>
+      <hr>
+      <div *ngFor="let courseS6 of sortedCourseList[6]">
+        <div *ngIf="courseS6.length !== 1">
+          <hr>
+        </div>
+        <div *ngFor="let courseS6Sorted of courseS6">
+          <div *ngIf="courseS6Sorted?.optional === '0' || courseS6Sorted?.optional == null">
+            <button type="button" class="h-10 btn btn-outline btn-lg btn-block infoButton mandatory"  id = {{courseS6Sorted.title}} (click) = clickCourseButton()>{{courseS6Sorted.title}}</button>
+          </div>
+          <div *ngIf="courseS6Sorted?.optional === '1' && courseS6Sorted?.courseConc !== -1 && courseS6Sorted?.courseConc !== null">
+            <button type="button" class="h-10 btn btn-outline btn-lg btn-block infoButton optional"  id = {{courseS6Sorted.title}} (click) = clickCourseButton()>{{courseS6Sorted.title}}</button>
+          </div>
+        </div>
+      </div>
+        <hr>
+    </div>
+  </div>
+</div>

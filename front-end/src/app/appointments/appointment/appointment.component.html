@@ -1,0 +1,127 @@
+<div *ngIf="currentUser?.professor === false" class="container">
+  <div class="card mb-3">
+    <div class="card-body">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-6">
+            <h5 class="card-title">Date: {{ appointment.date | date: 'dd/MM/yyyy' }}</h5>
+            <h6 class="card-subtitle text-muted">Horaire: {{ appointment.startTime }} à {{ appointment.endTime }}</h6>
+          </div>
+          <div class="col-md-6 text-right">
+            <h6 class="card-subtitle text-muted">{{ appointment.places - appointment.studentsID.length }} places restantes</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h1>{{ appointment.title }}</h1>
+      <p class="card-text">Description : {{ appointment.desc }}</p>
+    </div>
+    <div class="card-footer text-center btn-participate" *ngIf="appointment.places > appointment.studentsID.length && !appointment.studentsID.includes(currentUser.id)" (click)="join()">
+      Je souhaite participer
+    </div>
+    <div class="card-footer text-center" *ngIf="appointment.places <= appointment.studentsID.length && !appointment.studentsID.includes(currentUser.id)">
+      Il n'y a plus de place disponible
+    </div>
+    <div class="text-center btn-success card-footer" style="background-color: #28a745; border-color: #28a745;" *ngIf="appointment.studentsID.includes(currentUser.id)">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-9" style="padding-top: 8px">
+            Vous êtes inscrit à ce rendez-vous
+          </div>
+          <div class="col-sm-3 text-right">
+            <button class="btn btn-danger" (click)="removeStudent(currentUser.id,appointment)">Se désinscrire</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="currentUser?.professor === true" class="container">
+  <div class="card mb-3">
+    <div class="card-body">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-9">
+            <h5 class="card-title">Date: {{ appointment.date | date: 'dd/MM/yyyy' }}</h5>
+            <h6 class="card-subtitle text-muted">Horaire: {{ appointment.startTime }} à {{ appointment.endTime }}</h6>
+          </div>
+          <div class="col-md-3">
+            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+              <div class="btn-group mr-2" role="group" aria-label="Third group">
+                <button class="btn btn-info " (click)="open(content)"><i class="fas fa-edit"></i></button>
+              </div>
+              <div class="btn-group" role="group" aria-label="Third group">
+                <button class="btn btn-danger" (click)="archive()" ><i class="fas fa-trash-alt"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body">
+      <h1>{{ appointment.title }}</h1>
+      <p class="card-text">Description : {{ appointment.desc }}</p>
+    </div>
+    <div class="card-footer text-center">
+      <strong>Participants ({{ appointment.studentsID.length }}/{{ appointment.places }}):</strong>
+      <ul *ngIf="appointment.studentsID.length > 0">
+        <ng-container *ngFor="let studentID of appointment.studentsID">
+          <li style="margin-bottom:5px; list-style: none">{{ getNameWithId(studentID) }}
+            <button class="btn btn-danger btn-sm" (click)="removeStudent(studentID, appointment)" > <i class="fas fa-times fa-sm"></i></button>
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+  </div>
+</div>
+
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="">
+        <form class="form" [formGroup]="appointmentForm">
+          <fieldset>
+            <div class="form-group">
+              <label for="title">Titre :</label>
+              <input type="text" class="form-control" id="title" placeholder="Titre" [formControlName]="'title'" value="{{appointment.title}}" required="required">
+            </div>
+            <div class="form-group">
+              <label for="desc">Description :</label>
+              <textarea class="form-control" id="desc" rows="3" [formControlName]="'desc'" required="required" value="{{appointment.desc}}"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="places">Nombre de place :</label>
+              <input type="number" class="form-control" id="places" min="0" step="1" placeholder="Nombre de place" [formControlName]="'places'" value="{{appointment.places}}" required="required">
+            </div>
+            <div class="form-group">
+              <label for="date">Date :</label>
+              <input type="date" class="form-control" id="date" [formControlName]="'date'" value="{{ appointment.date | date: 'yyyy-MM-dd' }}" required="required">
+            </div>
+            <div class="form-group">
+              <label for="startTime">Horaire de début :</label>
+              <input type="time" class="form-control" id="startTime" placeholder="8:00" [formControlName]="'startTime'" value="{{appointment.startTime}}" required="required">
+            </div>
+            <div class="form-group">
+              <label for="endTime">Horaire de fin :</label>
+              <input type="time" class="form-control" id="endTime" placeholder="10:00" [formControlName]="'endTime'" value="{{appointment.endTime}}" required="required">
+            </div>
+            <div class="container text-center">
+              <button type="submit" class="btn btn-primary" (click)="validateEditionOfAppointment()" (click)="modal.close('Save click')">Envoyer</button>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+
+    </div>
+  </ng-template>
+  <hr>
+
+  <pre>{{closeResult}}</pre>

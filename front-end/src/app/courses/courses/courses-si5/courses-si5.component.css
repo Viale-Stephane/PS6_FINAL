@@ -1,0 +1,30 @@
+.infoButton{
+    background-color: deepskyblue;
+}
+.infoButton:hover{
+    background-color: #00ace6;
+}
+
+.infoDiv{
+    margin-bottom: 20px;
+}
+
+.addButton{
+    background-color: white;
+    margin-top: 10px;
+}
+
+.navButton{
+    background-color: saddlebrown;
+}
+
+.navButton:hover{
+    background-color: #70380f;
+}
+
+h2{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    background-color: rgba(255,255,255,0.80);
+    border-radius: 10px;
+}

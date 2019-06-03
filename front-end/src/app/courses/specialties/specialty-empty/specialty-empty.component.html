@@ -1,0 +1,16 @@
+<form [formGroup]="specialtyForm">
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input type="text" class="form-control" id="title" placeholder="Enter title of the specialty" [formControlName]="'title'">
+  </div>
+  <div class="form-group">
+    <label for="abr">Abréviation</label>
+    <input type="text" class="form-control" id="abr" placeholder="Abreviation" [formControlName]="'abr'">
+  </div>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea type="text" class="form-control" id="description" placeholder="Short description of the specialty" [formControlName]="'description'"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary" (click)="addSpecialty()"  [routerLink]="['/courses/coursesSI5']">Ajouter</button>
+</form>
+

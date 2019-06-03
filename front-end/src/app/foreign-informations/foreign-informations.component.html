@@ -1,0 +1,63 @@
+<div class="container enTete">
+    <h1 class="text-center">Partez à l'étranger</h1>
+</div>
+<div *ngIf="view1">
+
+    <div class="container">
+        <div class="row">
+            <div class="h-100 col-md-3 text-center" style="background-color: white">
+                <div class="choixEcole" *ngIf="schoolList">
+                    <select class="form-control" [ngModel]="selectedIndex" (ngModelChange)="update($event)"
+                        name="selectedSchool">
+                        <option *ngFor="let school of schoolList; let i=index" [value]="i">
+                            {{school?.name}}
+                        </option>
+                    </select>
+                </div>
+                <div>
+                    {{article()}}{{selectedSchool?.name}} environ {{moyenne()}}% des demandes ont été accepté
+                </div>
+                <button class="btn btn-primary btn-lg buttonTypeGraph" color="primary" (click)="changeType()">Type de
+                    graphe</button>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-8" style="background-color: white">
+                <div style="display: block" *ngIf="selectedSchool">
+                    <canvas baseChart [datasets]="selectedSchool?.barChartData" [labels]="barChartLabels"
+                        [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType"
+                        (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12" style="background-color: white">
+
+                {{article()}} {{selectedSchool?.name}}, pour cette année, il y a
+                {{selectedSchool?.peopleInterested.length}} personnes intéressés pour partir à l'étranger
+                <div *ngIf="this.userService.isConnectedAs() === 2">
+                    <button class="btn btn-primary btn-lg buttonTypeGraph" color="primary"
+                        (click)="changeView()">Afficher la liste des étudiants</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="!view1" style="background-color: white">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Liste des étudiants intéressés par la destination {{selectedSchool?.name}}  <button class="btn btn-primary btn-lg buttonTypeGraph" color="primary" (click)="changeView()">retour</button></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let people of selectedSchool?.peopleInterested" class="table table-striped">
+                <th scope="row">
+                    {{getUserById(people).username}}
+                </th>
+            </tr>
+        </tbody>
+    </table>
+    
+</div>

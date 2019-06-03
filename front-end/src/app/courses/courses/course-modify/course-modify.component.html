@@ -1,0 +1,28 @@
+<form [formGroup]="courseForm">
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input type="text" value = {{course.title}} class="form-control" id="title" placeholder="Enter title of the course" [formControlName]="'title'">
+  </div>
+  <div class="form-group">
+    <label for="ects">ECTS</label>
+    <input type="text" value = {{course.ects}} class="form-control" id="ects" placeholder="Number of ECTS" [formControlName]="'ects'">
+  </div>
+  <div class="form-group">
+    <label for="hour">Nombre d'heures</label>
+    <input type="text" value = {{course.hour}} class="form-control" id="hour" placeholder="Number of hours in the semester" [formControlName]="'hour'">
+  </div>
+  <div class="form-group">
+    <label for="year">Semestre</label>
+    <input type="text" value = {{course.year}} class="form-control" id="year" placeholder="Semester" [formControlName]="'year'">
+  </div>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <input type="text" value = {{course.description}} class="form-control" id="description" placeholder="Short description of the course" [formControlName]="'description'">
+  </div>
+  <div class="form-group">
+    <label for="optional">Le cours est-il optionnel ?</label>
+    <input type="checkbox" class="form-control" id="optional" [formControlName]="'optional'" [checked]="isChecked()">
+  </div>
+  <button type="submit" class="btn btn-primary" (click)="modifyCourse()">Modifier</button>
+</form>
+

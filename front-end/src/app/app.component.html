@@ -1,0 +1,7 @@
+<div *ngIf="currentUser==null">
+    <app-header-offline></app-header-offline>
+</div>
+<div *ngIf="currentUser!=null">
+    <app-header-online></app-header-online>
+</div>
+<router-outlet></router-outlet>

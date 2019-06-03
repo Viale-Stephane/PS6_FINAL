@@ -1,0 +1,54 @@
+.infoButton{
+    background-color: deepskyblue;
+    margin-bottom: 10px;
+}
+.infoButton:hover{
+    background-color: #00ace6;
+}
+
+.mandatory{
+    background-color: deepskyblue;
+}
+
+.mandatory:hover{
+    background-color: #00ace6;
+}
+
+.optional{
+    background-color: orange;
+}
+
+.optional:hover{
+    background-color: #e59400;
+}
+
+.modifyButton{
+    margin-right: 10px;
+}
+
+.addButton{
+    background-color: white;
+    margin-bottom: 10px;
+}
+
+.navButton{
+    background-color: saddlebrown;
+}
+.navButton:hover{
+    background-color: #70380f;
+}
+
+h2{
+    background-color: rgba(255,255,255,0.80);
+    border-radius: 10px;
+}
+
+hr {
+    border: 0;
+    clear:both;
+    display:block;
+    width: 96%;
+    background-color:yellow;
+    height: 3px;
+    border-radius: 5px;
+}

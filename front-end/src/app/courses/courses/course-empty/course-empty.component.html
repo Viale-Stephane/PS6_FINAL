@@ -1,0 +1,53 @@
+<form [formGroup]="courseForm">
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input type="text" class="form-control" id="title" placeholder="Enter title of the course" [formControlName]="'title'">
+  </div>
+  <div class="form-group">
+    <label for="ects">ECTS</label>
+    <input type="number" min="1" max="15" class="form-control" id="ects" placeholder="Number of ECTS" [formControlName]="'ects'">
+  </div>
+  <div class="form-group">
+    <label for="hour">Nombre d'heures</label>
+    <input type="number" class="form-control" id="hour" placeholder="Number of hours in the semester" [formControlName]="'hour'">
+  </div>
+  <div class="form-group">
+    <label for="year">Semestre</label>
+    <select class="form-control" name="year" id="year" [formControlName]="'year'">
+      <option [value]="5">S5</option>
+      <option [value]="6">S6</option>
+      <option [value]="7">S7</option>
+      <option [value]="8">S8</option>
+      <option [value]="9">S9</option>
+      <option [value]="10">S10</option>
+    </select>
+  </div>
+  <div *ngIf="isLastYear() === true">
+    <div class="form-group">
+      <label for="courseList">Spécialité</label>
+      <select class="form-control" name="specialty-list" id="specialtyList" [formControlName]="'spe'">
+        <option *ngFor="let specialty of SPECIALTY_LIST" [value]="specialty.abr">
+          {{specialty.title}}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <input type="text" class="form-control" id="description" placeholder="Short description of the course" [formControlName]="'description'">
+  </div>
+  <div class="form-group">
+    <label for="courseList">Cours en concurrence</label>
+    <select class="form-control" name="course-list" id="courseList" [formControlName]="'courseConc'">
+      <option *ngFor="let course of updatedList()" [value]="course.id">
+        {{course.title}}
+      </option>
+      <option [value]=-1>AUCUN</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="optional">Le cours est-il optionnel ?</label>
+    <input type="checkbox" class="form-control" id="optional" [formControlName]="'optional'">
+  </div>
+  <button type="button" class="btn btn-primary" (click)="addCourseClick()">Ajouter</button>
+</form>

@@ -1,0 +1,30 @@
+.infoButton{
+    background-color: deepskyblue;
+    margin-bottom: 10px;
+}
+
+.infoButton:hover{
+    background-color: #00ace6;
+}
+
+.addButton{
+    background-color: white;
+    margin-bottom: 10px;
+}
+
+.navButton{
+    background-color: saddlebrown;
+}
+
+.navButton:hover{
+    background-color: #70380f;
+}
+
+.modifyButton{
+    margin-right: 10px;
+}
+
+h2{
+    background-color: rgba(255,255,255,0.80);
+    border-radius: 10px;
+}

@@ -1,0 +1,26 @@
+@import '../../../styles/variables';
+
+/**
+ Use :host to apply some style to your entire component
+ */
+:host {
+  color: $white;
+}
+
+.header {
+  background: $linearGradient;
+  padding: 1em;
+}
+
+.btn-header {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+nav {
+  margin-bottom: 15px;
+}
+
+.onVeutLeDoigt:hover{
+  cursor:pointer;
+}

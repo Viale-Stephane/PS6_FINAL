@@ -1,0 +1,45 @@
+<div class="container presentation">
+    <div class="row align-items-center">
+        <div class="text-center" style="width:100%">
+            <h1>
+                Sciences de l'informatique
+            </h1>
+        </div>
+        <div>
+            La formation est centrée sur le développement logiciel dans tous ses aspects : applications mobiles, très grands logiciels, sécurité, interactions avec les utilisateurs, Web de données, intelligence artificielle, sciences des données, ...
+            <br>
+            Dans son organisation, elle vise à permettre à chaque étudiant·e de construire son parcours de formation durant les 3 années du cycle ingénieur, en lui proposant :
+            <br>
+            - dès le semestre 6 (deuxième semestre de la première année du cycle ingénieur) des choix d'enseignements optionnels
+            <br>
+            - à la fin du semestre 7, un projet pour découvrir les majeurs de spécialité avec lesquelles il ou elle a le plus d'affinité
+            <br>
+            - dès le semestre 8, des enseignements qui sont intégralement à choisir parmi des ensembles cohérents de matières.
+            <br>
+            La formation repose par ailleurs sur une utilisation continue de projets en groupe à réaliser soit durant un semestre, soit en fin de semestre sur une période dédiée. Par exemple, en fin de deuxième année du cycle ingénieur, les étudiant·e·s font un projet d'innovation où chaque équipe de projet propose et réalise un prototype d'une application originale. En dernière année 5, les étudiant·e·s choisissent une majeure de spécialité qui apporte un approfondissement métier pour les enseignements et un stage terminal sur la même thématique. Les majeures sont à choisir parmi :
+        <ul>
+            <!--
+            <li>Architecture Logicielle (AL)</li>
+            <li>Cryptographie, sécurité et vie privée dans les applications et les réseaux (CASPAR)</li>
+            <li>Intelligence Ambiante (IAM) :  présentation 2018</li>
+            <li>Interactions Homme - Machine (IHM)</li>
+            <li>Sciences, Technologies, Ressources et Applications du Web (Web)</li>
+            <li>Informatique et Mathématiques Appliquées à la Finance et à l'Assurance (IMAFA)</li>
+            <li>Science des Données (SD - formation partagée avec la spécialité MAM)</li>
+            -->
+            <li *ngFor="let speciality of SPECIALTY_LIST"> {{speciality.title}} ({{speciality.abr.toUpperCase()}})</li>
+        </ul>
+        </div>
+    </div>
+    <div class="row align-items-center text-center" id="navBar">
+        <div class="h-25 col-4">
+            <button type="button" [routerLink]="['/courses','3']" class="h-100 btn btn-outline btn-lg btn-block" (click)="selectSI3()">SI3</button>
+        </div>
+        <div class="col-4 h-25" >
+            <button type="button" [routerLink]="['/courses', '4']"  class="h-100 btn btn-outline btn-lg btn-block" (click)="selectSI4()">SI4</button>
+        </div>
+        <div class="col-4 h-25">
+            <button type="button" [routerLink]="['/courses/coursesSI5']"  class="h-100 btn btn-outline btn-lg btn-block" (click)="selectSI5()">SI5</button>
+        </div>
+    </div>
+</div>

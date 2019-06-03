@@ -1,0 +1,18 @@
+<form [formGroup]="specialtyForm">
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input type="text" value = {{specialty.title}} class="form-control" id="title" placeholder="Enter title of the specialty" [formControlName]="'title'">
+  </div>
+  <div class="form-group">
+    <label for="abr">Abréviation</label>
+    <input type="text" value = {{specialty.abr}} class="form-control" id="abr" placeholder="Abreviation" [formControlName]="'abr'">
+  </div>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea type="text" value = {{specialty.description}} class="form-control" id="description" placeholder="Short description of the specialty" [formControlName]="'description'"></textarea>
+  </div>
+  <div class="container text-center">
+    <button type="submit" class="btn btn-primary" (click)="modifySpecialty()">Modifier</button>
+  </div>
+</form>
+

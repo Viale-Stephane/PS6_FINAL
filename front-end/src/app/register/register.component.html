@@ -1,0 +1,54 @@
+<div class="container text-center form">
+  <div class="row">
+    <div class="col-md-4">
+
+    </div>
+    <div class="col-md-4 text-center">
+      <form class="py-1 register-form" [formGroup]="registerForm" (ngSubmit)="addUser()">
+        <h3> Inscription </h3>
+        <label for="username">
+          Nom d'utilisateur <br>
+          <input class=" py-1 form-control" type="text" id="username" [formControlName]="'username'">
+        </label>
+        <br>
+        <label for="password">
+          Mot de passe <br>
+          <input class=" py-1 form-control" type="password" id="password" [formControlName]="'password'">
+        </label>
+        <br>
+        <label for="phoneNumber">
+          Numéro de téléphone <br>
+          <input class=" py-1 form-control" type="tel" id="phoneNumber" [formControlName]="'phoneNumber'" pattern="[0]{1}[0-9]{9}">
+        </label>
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="professor" [formControlName]="'professor'" checked="">
+          <label class="custom-control-label" for="professor" checked="">Êtes-vous enseignant ?</label><br>
+        </div>
+        <br>
+        <div *ngIf="!isAProfessor()">
+          Êtes vous intéressé par un semestre à l'étranger ? <br>
+          <label class="switch">
+            <input type="checkbox" (click)=updateWantADestination()>
+            <span class="slider round"></span>
+          </label>
+          <div *ngIf="wantToAddDestination()">
+            <div class="form-group">
+              <label for="schoolList">Destination vous intéressant le plus</label>
+              <select class="form-control" name="school-list" id="schoolList" [formControlName]="'destination'">
+                <option *ngFor="let school of schoolList" [value]="school.name">
+                  {{school.name}}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <br>
+        <a class="btn btn-secondary btn-lg btn-header btn-return" (click)="goBack()"> Retour </a>
+        <button type="submit" class="btn btn-primary btn-lg btn-header"> Valider </button>
+      </form>
+    </div>
+    <div class="col-md-4">
+
+    </div>
+  </div>
+</div>
