@@ -1,6 +1,10 @@
 package com.example.ps6waitingqueue;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,6 +32,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 1234;
     ListView listView;
     public static String urlAppointments = "http://127.0.0.1:9428/api/appointments";
     public static String urlUsers = "http://127.0.0.1:9428/api/login";
@@ -35,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     RequestQueue requestQueue;
     static ArrayList<Appointment> appointmentsList;
     static ArrayList<User> usersList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         appointmentsList = new ArrayList<>();
         usersList = new ArrayList<>();
         getAppointments();
+        checkPermission();
         getUsers();
     }
     public void setListView(){
@@ -112,5 +119,17 @@ public class MainActivity extends AppCompatActivity {
         this.requestQueue.add(jsonArrayRequest);
 
     }
+
+    public void checkPermission(){
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Permission is not granted
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.SEND_SMS},
+                    MY_PERMISSIONS_REQUEST_SEND_SMS);
+        }
+    }
+
+
 
 }

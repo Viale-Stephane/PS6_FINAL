@@ -1,9 +1,12 @@
 package com.example.ps6waitingqueue;
 
+import android.Manifest;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
 import android.widget.Button;
@@ -13,6 +16,8 @@ import com.example.ps6waitingqueue.models.Appointment;
 import com.example.ps6waitingqueue.models.User;
 
 import java.util.ArrayList;
+
+import static com.example.ps6waitingqueue.MainActivity.MY_PERMISSIONS_REQUEST_SEND_SMS;
 
 
 public class NextActivity extends AppCompatActivity {
@@ -60,12 +65,10 @@ public class NextActivity extends AppCompatActivity {
                 } else {
                     nextName.setText(noNewStudent);
                 }
-                Uri uri = Uri.parse("smsto:" + user.getPhoneNumber());
-                Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
-                intent.putExtra("sms_body", "Mme.Pinna vous attend dans son bureau.");
-                SmsManager manager = SmsManager.getDefault();
-                manager.sendTextMessage(user.getPhoneNumber(),null,"Mme.Pinna vous attend dans son bureau.",null,null);
-                //startActivity(intent);
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS)
+                        == PackageManager.PERMISSION_GRANTED){
+                    SmsManager.getDefault().sendTextMessage(user.getPhoneNumber(),null,"Mme.Pinna vous attend dans son bureau.",null,null);
+                }
                 int numberLeftOfStudent = appointment.getStudentsID().size() - studentNumber[0];
                 numberStudentsLeft.setText(numberLeft + numberLeftOfStudent);
                 if(numberLeftOfStudent == 0) {
@@ -88,6 +91,8 @@ public class NextActivity extends AppCompatActivity {
         }
         return null;
     }
+
+
 }
 
 
