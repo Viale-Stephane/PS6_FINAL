@@ -2,14 +2,17 @@ package com.example.ps6waitingqueue.activities;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
 
 import com.example.ps6waitingqueue.R;
+import com.example.ps6waitingqueue.adapters.AppointmentsPagerAdapter;
 import com.example.ps6waitingqueue.adapters.ListAppointmentsAdapter;
 import com.example.ps6waitingqueue.listener.AppointmentsListener;
 import com.example.ps6waitingqueue.listener.UsersListener;
@@ -24,9 +27,8 @@ import java.util.Timer;
 
 public class MainActivity extends AppCompatActivity implements UsersListener, AppointmentsListener {
 
-    private ListView listView;
-    static ArrayList<Appointment> appointmentsList;
-    static ArrayList<User> usersList;
+    public static ArrayList<Appointment> appointmentsList;
+    public static ArrayList<User> usersList;
     public static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 1234;
 
 
@@ -34,22 +36,20 @@ public class MainActivity extends AppCompatActivity implements UsersListener, Ap
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        listView = findViewById(R.id.listViewAppointments);
         AppointmentsService.getAppointments(this, this);
         loadApppointment();
         UsersService.getUsers(this, this);
         checkPermission();
+        ViewPager viewPager = findViewById(R.id.viewpagerappointments);
+        AppointmentsPagerAdapter appointmentsPagerAdapter = new AppointmentsPagerAdapter(this,getSupportFragmentManager());
+        viewPager.setAdapter(appointmentsPagerAdapter);
+        TabLayout tabLayout = findViewById(R.id.sliding_tabs_appointments);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     public void loadApppointment() {
         Timer timer = new Timer();
         timer.schedule(new AppointmentsTask(this, this), 0, 2000);
-    }
-
-    public void setAppointmentsListView() {
-        Log.d("appointments", appointmentsList.get(0).toString());
-        ListAppointmentsAdapter listAppointmentsAdapter = new ListAppointmentsAdapter(MainActivity.this,appointmentsList);
-        listView.setAdapter(listAppointmentsAdapter);
     }
 
     @Override
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements UsersListener, Ap
     @Override
     public void onRequestAppointmentsSuccess(ArrayList<Appointment> appointments) {
         appointmentsList = appointments;
-        setAppointmentsListView();
+        //setAppointmentsListView();
 
     }
 
