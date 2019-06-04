@@ -8,7 +8,7 @@ public class User {
     private String phoneNumber;
     private long id;
 
-    public User(String username,String password, String professor, String destination, String phoneNumber, long id){
+    public User(String username,String password, String professor, String destination, String phoneNumber, long id) {
         this.username = username;
         this.password = password;
         this.professor = professor;
@@ -16,7 +16,7 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.id = id;
     }
-    public User(){
+    public User() {
         this.username = "";
         this.password = "";
         this.professor = "";
