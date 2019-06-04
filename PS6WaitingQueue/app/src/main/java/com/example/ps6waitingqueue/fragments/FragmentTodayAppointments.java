@@ -55,7 +55,6 @@ public class FragmentTodayAppointments extends Fragment implements UsersListener
         String todayDateDay = dateFormatDay.format(date);
         String todayDateMonth = dateFormatMonth.format(date);
         for(Appointment temp : appointments){
-            Log.d("Date",temp.getDate());
             if(checkParseDate(temp.getDate(),todayDateDay,todayDateMonth)){
                 toReturn.add(temp);
             }
@@ -65,7 +64,6 @@ public class FragmentTodayAppointments extends Fragment implements UsersListener
     }
 
     public void setAppointmentsListView() {
-        Log.d("appointments", appointmentsList.get(0).toString());
         ListAppointmentsAdapter listAppointmentsAdapter = new ListAppointmentsAdapter(this.getContext(),filterToday(appointmentsList));
         listView.setAdapter(listAppointmentsAdapter);
     }
@@ -87,7 +85,6 @@ public class FragmentTodayAppointments extends Fragment implements UsersListener
 
     public boolean checkParseDate(String initDate, String todayDay,String todayMonth){
         String[] parts = initDate.split("-");
-        Log.d("Date",parts[0] );
         return ((parts[2].substring(0,2)).equals(todayDay) && parts[1].equals(todayMonth));
     }
 

@@ -25,12 +25,9 @@ public class UsersService {
         requestQueue = Volley.newRequestQueue(context);
         ArrayList<User> usersList = new ArrayList<>();
 
-        Log.d("getUsers","je suis là !");
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,urlUsers, null, response -> {
-            Log.d("getUsers", response.toString());
             if (response.length() > 0) {
                 Gson gson = new Gson();
-                Log.d("getUsers","je suis > 0 !");
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         User user = gson.fromJson(response.getJSONObject(i).toString(), User.class);

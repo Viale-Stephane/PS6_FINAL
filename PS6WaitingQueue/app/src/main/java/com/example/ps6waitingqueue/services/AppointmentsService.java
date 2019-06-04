@@ -25,10 +25,8 @@ public class AppointmentsService {
         ArrayList<Appointment> appointmentsList = new ArrayList<>();
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, urlAppointments, null, response -> {
-            Log.d("getAppointments", response.toString());
             if (response.length() > 0) {
                 Gson gson = new Gson();
-                Log.d("getAppointments","je suis > 0 !");
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         Appointment appointment = gson.fromJson(response.getJSONObject(i).toString(), Appointment.class);
@@ -39,7 +37,6 @@ public class AppointmentsService {
                 }
                 listener.onRequestAppointmentsSuccess(appointmentsList);
 
-                Log.d("Taille", String.valueOf(appointmentsList.size()));
             }
         }, error -> {
             Log.e("Volley", "error"+error.getMessage());
@@ -53,8 +50,8 @@ public class AppointmentsService {
 
     public static void deleteAppointment(long id) {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.DELETE, urlAppointments + "/" + id, null, response -> {
-
         }, error -> {
+
         });
         requestQueue.add(jsonArrayRequest);
     }

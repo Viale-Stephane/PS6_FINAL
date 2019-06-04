@@ -65,7 +65,6 @@ public class ListAppointmentsAdapter extends BaseAdapter {
 
     public String parseDate(String initDate){
         String[] parts = initDate.split("-");
-        Log.d("Date",parts[0] );
         return (parts[2].substring(0,2)+"/"+parts[1]+"/"+parts[0]);
     }
 }

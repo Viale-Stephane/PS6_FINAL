@@ -45,7 +45,6 @@ public class FragmentAllAppointments extends Fragment implements UsersListener, 
     }
 
     public void setAppointmentsListView() {
-        Log.d("appointments", appointmentsList.get(0).toString());
         ListAppointmentsAdapter listAppointmentsAdapter = new ListAppointmentsAdapter(this.getContext(),appointmentsList);
         listView.setAdapter(listAppointmentsAdapter);
     }
