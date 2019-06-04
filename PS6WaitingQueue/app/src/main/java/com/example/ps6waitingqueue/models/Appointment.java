@@ -13,8 +13,9 @@ public class Appointment implements Serializable {
     private int places;
     private long teacherID;
     private ArrayList<Long> studentsID;
+
     public Appointment(int id, String title, String desc, String startTime, String endTime, String date,
-                       int places, int teacherID){
+                       int places, int teacherID) {
         this.id = id;
         this.title = title;
         this.desc = desc;
@@ -25,7 +26,7 @@ public class Appointment implements Serializable {
         this.teacherID = teacherID;
     }
 
-    public Appointment(){
+    public Appointment() {
         this.id = 0;
         this.title = "";
         this.desc = "";

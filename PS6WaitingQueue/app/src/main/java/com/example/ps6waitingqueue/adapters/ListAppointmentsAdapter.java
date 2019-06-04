@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.ps6waitingqueue.NextActivity;
+import com.example.ps6waitingqueue.activities.NextActivity;
 import com.example.ps6waitingqueue.R;
 import com.example.ps6waitingqueue.models.Appointment;
 
