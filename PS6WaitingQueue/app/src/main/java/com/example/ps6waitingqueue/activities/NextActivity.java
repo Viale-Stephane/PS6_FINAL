@@ -8,12 +8,16 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.ps6waitingqueue.R;
 import com.example.ps6waitingqueue.models.Appointment;
 import com.example.ps6waitingqueue.models.User;
+
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class NextActivity extends AppCompatActivity {
@@ -23,19 +27,29 @@ public class NextActivity extends AppCompatActivity {
     private TextView currentName;
     private TextView nextTitle;
     private TextView numberStudentsLeft;
+    private TextView timePerAppointment;
     private Appointment appointment;
     private final String noNewStudent = "Il n'y a pas de prochain étudiant.";
     private final String noStudent = "Aucun étudiant n'est dans votre bureau.";
     private final String currentStudent = "Etudiant actuel : ";
     private final String nextStudent = "Etudiant suivant : ";
     private final String numberLeft = "Nombre d'étudiants restants : ";
+    private int timeSpent;
+    Thread thread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.appointment = (Appointment) getIntent().getSerializableExtra("Appointment");
-        final int[] studentNumber = {0};
+        timeSpent = 0;
+        this.thread = new Thread();
         setContentView(R.layout.next_page);
+        timePerAppointment = findViewById(R.id.timePerAppointment);
+        Calendar cal = Calendar.getInstance();
+        int hour = cal.get(Calendar.HOUR_OF_DAY);
+        int minute = cal.get(Calendar.MINUTE);
+        int numberOfMinuteByAppointment = getTimeByAppointment(appointment.getStartTime(), appointment.getEndTime(), appointment.getStudentsID().size());
+        final int[] studentNumber = {0};
         nextName = findViewById(R.id.nextName);
         if(appointment.getStudentsID().size() > 1)
             nextName.setText(nextStudent+getUserById(appointment.getStudentsID().get(0)).getUsername());
@@ -51,6 +65,11 @@ public class NextActivity extends AppCompatActivity {
         nextButton = findViewById(R.id.nextButton);
         nextButton.setOnClickListener(v -> {
             if(studentNumber[0] < this.appointment.getStudentsID().size()) {
+                this.timeSpent = 0;
+                if(thread.isAlive()) {
+                    this.thread.interrupt();
+                }
+                startTimer(numberOfMinuteByAppointment);
                 nextButton.setBackgroundResource(R.drawable.circle_button_blue);
                 nextButton.setText("Suivant");
                 User user = getUserById(this.appointment.getStudentsID().get(studentNumber[0]));
@@ -81,6 +100,43 @@ public class NextActivity extends AppCompatActivity {
 
     }
 
+    private void startTimer(int numberOfMinuteByAppointment){
+        updateTimePerAppointment(numberOfMinuteByAppointment, timeSpent);
+        this.thread = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    while (!isInterrupted()) {
+                        //Thread.sleep(60000); //minutes
+                        Thread.sleep(1000); //secondes
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                timeSpent ++;
+                                updateTimePerAppointment(numberOfMinuteByAppointment, timeSpent);
+                            }
+                        });
+                    }
+                } catch (InterruptedException e) {
+                }
+            }
+        };
+
+        thread.start();
+    }
+
+    private void updateTimePerAppointment(int numberOfMinuteByAppointment, int timeSpent){
+        if(numberOfMinuteByAppointment == -1){
+            timePerAppointment.setText("");
+        } else {
+            if(this.timeSpent >= numberOfMinuteByAppointment){
+                timePerAppointment.setText("Vous devriez changer d'élève pour être à l'heure");
+            } else {
+                timePerAppointment.setText("Il vous reste " + (numberOfMinuteByAppointment - timeSpent) + " minutes avec cet élève");
+            }//timePerAppointment.setText("coucou");
+        }
+    }
+
     private User getUserById(long id) {
         for (User user : MainActivity.usersList) {
             if(user.getId() == id) {
@@ -88,6 +144,23 @@ public class NextActivity extends AppCompatActivity {
             }
         }
         return null;
+    }
+
+    private int getTimeByAppointment(String startTime, String endTime, int numberOfAppointment){
+        int totalMinute = 0;
+        String[] parts = startTime.split(":");
+        int startHour = Integer.valueOf(parts[0]);
+        int startMinute = Integer.valueOf(parts[1]);
+        String[] partsBis = endTime.split(":");
+        int endHour = Integer.valueOf(partsBis[0]);
+        int endMinute = Integer.valueOf(partsBis[1]);
+        int minuteTotalStart = startHour * 60 + startMinute;
+        int minuteTotalEnd = endHour * 60 + endMinute;
+        totalMinute = minuteTotalEnd - minuteTotalStart;
+        if(numberOfAppointment == 0){
+            return -1;
+        }
+        return (totalMinute/numberOfAppointment);
     }
 }
 
