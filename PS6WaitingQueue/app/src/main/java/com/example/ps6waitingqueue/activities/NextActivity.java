@@ -20,6 +20,8 @@ import com.example.ps6waitingqueue.services.AppointmentsService;
 import java.util.Calendar;
 import java.util.Date;
 
+import static com.example.ps6waitingqueue.activities.LoginActivity.usersList;
+
 
 public class NextActivity extends AppCompatActivity {
 
@@ -140,7 +142,7 @@ public class NextActivity extends AppCompatActivity {
     }
 
     private User getUserById(long id) {
-        for (User user : MainActivity.usersList) {
+        for (User user : usersList) {
             if(user.getId() == id) {
                 return user;
             }

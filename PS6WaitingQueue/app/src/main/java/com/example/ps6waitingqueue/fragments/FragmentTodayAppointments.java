@@ -31,6 +31,8 @@ import java.util.Date;
 import java.util.Map;
 import java.util.Timer;
 
+import static com.example.ps6waitingqueue.activities.MainActivity.currentUser;
+
 public class FragmentTodayAppointments extends Fragment implements UsersListener, AppointmentsListener {
     private ListView listView;
     public ArrayList<Appointment> appointmentsList;
@@ -47,6 +49,17 @@ public class FragmentTodayAppointments extends Fragment implements UsersListener
         checkPermission();
         return view;
     }
+
+    public ArrayList<Appointment> filterTeacher(ArrayList<Appointment> appointments) {
+        ArrayList<Appointment> toReturn = new ArrayList<>();
+        for(Appointment appointment : appointments){
+            if (appointment.getTeacherID() == currentUser.getId()) {
+                toReturn.add(appointment);
+            }
+        }
+        return toReturn;
+    }
+
     public ArrayList<Appointment> filterToday(ArrayList<Appointment> appointments){
         ArrayList<Appointment> toReturn = new ArrayList<>();
         DateFormat dateFormatDay = new SimpleDateFormat("dd");
@@ -55,7 +68,7 @@ public class FragmentTodayAppointments extends Fragment implements UsersListener
         String todayDateDay = dateFormatDay.format(date);
         String todayDateMonth = dateFormatMonth.format(date);
         for(Appointment temp : appointments){
-            if(checkParseDate(temp.getDate(),todayDateDay,todayDateMonth)){
+            if (checkParseDate(temp.getDate(),todayDateDay,todayDateMonth)) {
                 toReturn.add(temp);
             }
         }
@@ -64,7 +77,7 @@ public class FragmentTodayAppointments extends Fragment implements UsersListener
     }
 
     public void setAppointmentsListView() {
-        ListAppointmentsAdapter listAppointmentsAdapter = new ListAppointmentsAdapter(this.getContext(),filterToday(appointmentsList));
+        ListAppointmentsAdapter listAppointmentsAdapter = new ListAppointmentsAdapter(this.getContext(), filterTeacher(filterToday(appointmentsList)));
         listView.setAdapter(listAppointmentsAdapter);
     }
 

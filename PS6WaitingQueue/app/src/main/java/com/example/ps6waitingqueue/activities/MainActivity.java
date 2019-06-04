@@ -25,10 +25,12 @@ import com.example.ps6waitingqueue.tasks.AppointmentsTask;
 import java.util.ArrayList;
 import java.util.Timer;
 
+import static com.example.ps6waitingqueue.activities.LoginActivity.usersList;
+
 public class MainActivity extends AppCompatActivity implements UsersListener, AppointmentsListener {
 
     public static ArrayList<Appointment> appointmentsList;
-    public static ArrayList<User> usersList;
+    public static User currentUser;
     public static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 1234;
 
 
@@ -36,10 +38,20 @@ public class MainActivity extends AppCompatActivity implements UsersListener, Ap
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (getIntent().hasExtra("username")) {
+            String username = getIntent().getStringExtra("username");
+            for (User user : usersList) {
+                if (user.getUsername().equals(username)) {
+                    currentUser = user;
+                }
+            }
+        }
+
         AppointmentsService.getAppointments(this, this);
         loadApppointment();
-        UsersService.getUsers(this, this);
         checkPermission();
+
         ViewPager viewPager = findViewById(R.id.viewpagerappointments);
         AppointmentsPagerAdapter appointmentsPagerAdapter = new AppointmentsPagerAdapter(this,getSupportFragmentManager());
         viewPager.setAdapter(appointmentsPagerAdapter);

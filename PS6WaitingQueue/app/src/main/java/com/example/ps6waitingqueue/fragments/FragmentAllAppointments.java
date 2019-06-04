@@ -27,6 +27,8 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Timer;
 
+import static com.example.ps6waitingqueue.activities.MainActivity.currentUser;
+
 public class FragmentAllAppointments extends Fragment implements UsersListener, AppointmentsListener {
     private ListView listView;
     public ArrayList<Appointment> appointmentsList;
@@ -44,8 +46,18 @@ public class FragmentAllAppointments extends Fragment implements UsersListener, 
         return view;
     }
 
+    public ArrayList<Appointment> filterTeacher(ArrayList<Appointment> appointments) {
+        ArrayList<Appointment> toReturn = new ArrayList<>();
+        for(Appointment appointment : appointments){
+            if (appointment.getTeacherID() == currentUser.getId()) {
+                toReturn.add(appointment);
+            }
+        }
+        return toReturn;
+    }
+
     public void setAppointmentsListView() {
-        ListAppointmentsAdapter listAppointmentsAdapter = new ListAppointmentsAdapter(this.getContext(),appointmentsList);
+        ListAppointmentsAdapter listAppointmentsAdapter = new ListAppointmentsAdapter(this.getContext(), filterTeacher(appointmentsList));
         listView.setAdapter(listAppointmentsAdapter);
     }
 
