@@ -17,8 +17,10 @@ import com.example.ps6waitingqueue.models.Appointment;
 import com.example.ps6waitingqueue.models.User;
 import com.example.ps6waitingqueue.services.AppointmentsService;
 import com.example.ps6waitingqueue.services.UsersService;
+import com.example.ps6waitingqueue.tasks.AppointmentsTask;
 
 import java.util.ArrayList;
+import java.util.Timer;
 
 public class MainActivity extends AppCompatActivity implements UsersListener, AppointmentsListener {
 
@@ -34,8 +36,14 @@ public class MainActivity extends AppCompatActivity implements UsersListener, Ap
         setContentView(R.layout.activity_main);
         listView = findViewById(R.id.listViewAppointments);
         AppointmentsService.getAppointments(this, this);
+        loadApppointment();
         UsersService.getUsers(this, this);
         checkPermission();
+    }
+
+    public void loadApppointment() {
+        Timer timer = new Timer();
+        timer.schedule(new AppointmentsTask(this, this), 0, 2000);
     }
 
     public void setAppointmentsListView() {
