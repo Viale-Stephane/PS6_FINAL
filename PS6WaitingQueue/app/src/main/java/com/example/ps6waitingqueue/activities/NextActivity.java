@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.example.ps6waitingqueue.R;
 import com.example.ps6waitingqueue.models.Appointment;
 import com.example.ps6waitingqueue.models.User;
+import com.example.ps6waitingqueue.services.AppointmentsService;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -93,6 +94,7 @@ public class NextActivity extends AppCompatActivity {
                     nextButton.setBackgroundResource(R.drawable.circle_button_red);
                 }
             } else {
+                AppointmentsService.deleteAppointment(appointment.getId());
                 onBackPressed();
                 // quitter la page retour aux rdv & fermer le rdv
             }

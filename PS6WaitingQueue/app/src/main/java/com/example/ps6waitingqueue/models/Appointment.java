@@ -68,5 +68,9 @@ public class Appointment implements Serializable {
     public long getTeacherID() {
         return teacherID;
     }
+
+    public long getId() {
+        return id;
+    }
 }
 

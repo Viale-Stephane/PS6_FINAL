@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class UsersService {
 
-    private static String urlUsers = "http://127.0.0.1:9428/api/login";
+    private static String urlUsers = "http://127.0.0.1:1880/users";
     private static RequestQueue requestQueue;
 
     public static ArrayList<User> getUsers(Context context, UsersListener listener) {
@@ -42,7 +42,7 @@ public class UsersService {
                 listener.onRequestUsersSuccess(usersList);
             }
         }, error -> {
-            Log.e("Volley", error.getMessage());
+            Log.e("Volley", "error"+error.getMessage());
             listener.onRequestUsersFailure(usersList);
         });
 

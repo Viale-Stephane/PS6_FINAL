@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class AppointmentsService {
 
-    private static String urlAppointments = "http://127.0.0.1:9428/api/appointments";
+    private static String urlAppointments = "http://127.0.0.1:1880/appointments";
     private static RequestQueue requestQueue;
 
     public static ArrayList<Appointment> getAppointments(Context context, AppointmentsListener listener) {
@@ -42,7 +42,7 @@ public class AppointmentsService {
                 Log.d("Taille", String.valueOf(appointmentsList.size()));
             }
         }, error -> {
-            Log.e("Volley", error.getMessage());
+            Log.e("Volley", "error"+error.getMessage());
             listener.onRequestAppointmentsFailure(appointmentsList);
         });
 
@@ -50,4 +50,14 @@ public class AppointmentsService {
 
         return appointmentsList;
     }
+
+    public static void deleteAppointment(long id) {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.DELETE, urlAppointments + "/" + id, null, response -> {
+
+        }, error -> {
+        });
+        requestQueue.add(jsonArrayRequest);
+    }
 }
+
+
