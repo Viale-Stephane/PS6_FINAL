@@ -20,22 +20,27 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
+        <service
+            android:name=".services.MQTTService"
+            android:exported="false"></service>
+
         <activity
             android:name=".activities.LoginActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".activities.MainActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.NextActivity"
             android:screenOrientation="portrait" />
-        <service android:name="org.eclipse.paho.android.service.MqttService" >
-        </service>
+
+        <service android:name="org.eclipse.paho.android.service.MqttService"></service>
     </application>
 
 </manifest>

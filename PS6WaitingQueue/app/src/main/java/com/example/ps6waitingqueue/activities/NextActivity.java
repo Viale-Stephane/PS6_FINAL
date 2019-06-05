@@ -1,27 +1,20 @@
 package com.example.ps6waitingqueue.activities;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.ps6waitingqueue.App;
 import com.example.ps6waitingqueue.R;
 import com.example.ps6waitingqueue.models.Appointment;
 import com.example.ps6waitingqueue.models.User;
-import com.example.ps6waitingqueue.services.AppointmentsService;
 
 import java.util.Calendar;
-import java.util.Date;
-
-import static com.example.ps6waitingqueue.activities.LoginActivity.usersList;
-
 
 public class NextActivity extends AppCompatActivity {
 
@@ -38,11 +31,12 @@ public class NextActivity extends AppCompatActivity {
     private final String nextStudent = "Etudiant suivant : ";
     private final String numberLeft = "Nombre d'étudiants restants : ";
     private int timeSpent;
-    Thread thread;
+    private Thread thread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         this.appointment = (Appointment) getIntent().getSerializableExtra("Appointment");
         timeSpent = 0;
         this.thread = new Thread();
@@ -96,7 +90,7 @@ public class NextActivity extends AppCompatActivity {
                     nextButton.setBackgroundResource(R.drawable.circle_button_red);
                 }
             } else {
-                AppointmentsService.deleteAppointment(appointment.getId());
+                // TODO : AppointmentsService.deleteAppointment(appointment.getId());
                 onBackPressed();
                 // quitter la page retour aux rdv & fermer le rdv
             }
@@ -142,7 +136,7 @@ public class NextActivity extends AppCompatActivity {
     }
 
     private User getUserById(long id) {
-        for (User user : usersList) {
+        for (User user : ((App) this.getApplication()).getUsers().getUsers()) {
             if(user.getId() == id) {
                 return user;
             }

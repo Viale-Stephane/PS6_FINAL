@@ -6,30 +6,20 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.example.ps6waitingqueue.App;
 import com.example.ps6waitingqueue.R;
-import com.example.ps6waitingqueue.activities.MainActivity;
 import com.example.ps6waitingqueue.adapters.ListAppointmentsAdapter;
-import com.example.ps6waitingqueue.listener.AppointmentsListener;
-import com.example.ps6waitingqueue.listener.UsersListener;
 import com.example.ps6waitingqueue.models.Appointment;
 import com.example.ps6waitingqueue.models.User;
-import com.example.ps6waitingqueue.services.AppointmentsService;
-import com.example.ps6waitingqueue.services.UsersService;
-import com.example.ps6waitingqueue.tasks.AppointmentsTask;
 
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.Timer;
 
-import static com.example.ps6waitingqueue.activities.MainActivity.currentUser;
-
-public class FragmentAllAppointments extends Fragment implements UsersListener, AppointmentsListener {
+public class FragmentAllAppointments extends Fragment {
     private ListView listView;
     public ArrayList<Appointment> appointmentsList;
     public ArrayList<User> usersList;
@@ -39,9 +29,9 @@ public class FragmentAllAppointments extends Fragment implements UsersListener, 
         final View view = inflater.inflate(R.layout.fragment_all_appointments, container, false);
         listView = view.findViewById(R.id.listViewAllAppointments);
         //setAppointmentsListView();
-        AppointmentsService.getAppointments(this.getContext(), this);
-        loadApppointment();
-        UsersService.getUsers(this.getContext(), this);
+        appointmentsList = ((App) this.getActivity().getApplication()).getAppointments().getAppointments();
+        usersList = ((App) this.getActivity().getApplication()).getUsers().getUsers();
+
         checkPermission();
         return view;
     }
@@ -49,7 +39,7 @@ public class FragmentAllAppointments extends Fragment implements UsersListener, 
     public ArrayList<Appointment> filterTeacher(ArrayList<Appointment> appointments) {
         ArrayList<Appointment> toReturn = new ArrayList<>();
         for(Appointment appointment : appointments){
-            if (appointment.getTeacherID() == currentUser.getId()) {
+            if (appointment.getTeacherID() ==  ((App) this.getActivity().getApplication()).getCurrentUser().getId()) {
                 toReturn.add(appointment);
             }
         }
@@ -61,11 +51,6 @@ public class FragmentAllAppointments extends Fragment implements UsersListener, 
         listView.setAdapter(listAppointmentsAdapter);
     }
 
-    public void loadApppointment() {
-        Timer timer = new Timer();
-        timer.schedule(new AppointmentsTask(this.getContext(), this), 0, 2000);
-    }
-
     public void checkPermission(){
         if (ContextCompat.checkSelfPermission(this.getContext(), Manifest.permission.SEND_SMS)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -74,26 +59,5 @@ public class FragmentAllAppointments extends Fragment implements UsersListener, 
                     new String[]{Manifest.permission.SEND_SMS},
                     MY_PERMISSIONS_REQUEST_SEND_SMS);
         }
-    }
-
-    @Override
-    public void onRequestUsersSuccess(ArrayList<User> users) {
-        usersList = users;
-    }
-
-    @Override
-    public void onRequestUsersFailure(ArrayList<User> users) {
-        usersList = new ArrayList<>();
-    }
-
-    @Override
-    public void onRequestAppointmentsSuccess(ArrayList<Appointment> appointments) {
-        appointmentsList = appointments;
-        setAppointmentsListView();
-    }
-
-    @Override
-    public void onRequestAppointmentsFailure(ArrayList<Appointment> appointments) {
-        appointmentsList = new ArrayList<>();
     }
 }
