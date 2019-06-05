@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.ps6waitingqueue.R;
@@ -20,6 +21,7 @@ import com.example.ps6waitingqueue.listener.UsersListener;
 import com.example.ps6waitingqueue.models.Appointment;
 import com.example.ps6waitingqueue.models.User;
 import com.example.ps6waitingqueue.services.AppointmentsService;
+import com.example.ps6waitingqueue.services.MqttService;
 import com.example.ps6waitingqueue.services.UsersService;
 import com.example.ps6waitingqueue.tasks.AppointmentsTask;
 
@@ -38,11 +40,17 @@ public class FragmentTodayAppointments extends Fragment implements UsersListener
     public ArrayList<Appointment> appointmentsList;
     public ArrayList<User> usersList;
     public static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 1234;
+    Button testMQTT;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_today_appointments, container, false);
         listView = view.findViewById(R.id.listViewTodayAppointments);
         //setAppointmentsListView();
+        testMQTT = view.findViewById(R.id.testMQTTButton);
+        MqttService mqttService = new MqttService(this.getContext());
+        testMQTT.setOnClickListener(v->{
+            mqttService.sendStringMessage("currentAppointment","je test des choses");
+        });
         AppointmentsService.getAppointments(this.getContext(), this);
         loadApppointment();
         UsersService.getUsers(this.getContext(), this);

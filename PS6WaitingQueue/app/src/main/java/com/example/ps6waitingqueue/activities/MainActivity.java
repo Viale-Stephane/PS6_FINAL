@@ -19,6 +19,7 @@ import com.example.ps6waitingqueue.listener.UsersListener;
 import com.example.ps6waitingqueue.models.Appointment;
 import com.example.ps6waitingqueue.models.User;
 import com.example.ps6waitingqueue.services.AppointmentsService;
+import com.example.ps6waitingqueue.services.MqttService;
 import com.example.ps6waitingqueue.services.UsersService;
 import com.example.ps6waitingqueue.tasks.AppointmentsTask;
 
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements UsersListener, Ap
                 }
             }
         }
+        MqttService mqttService = new MqttService(this);
 
         AppointmentsService.getAppointments(this, this);
         loadApppointment();

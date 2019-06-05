@@ -33,7 +33,6 @@ public class LoginActivity extends AppCompatActivity implements UsersListener {
     Button testConnectMqtt;
     public static ArrayList<User> usersList;
 
-    private final String url = "tcp://127.0.0.1:1883";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,48 +44,8 @@ public class LoginActivity extends AppCompatActivity implements UsersListener {
         loginButton = findViewById(R.id.loginButton);
         usernameEditText = findViewById(R.id.usernameEditText);
         passwordEditText = findViewById(R.id.password_input);
-        testConnectMqtt = findViewById(R.id.testButtonConnect);
-        testConnectMqtt.setOnClickListener(v-> {
-            mqttConnect();
-        });
     }
 
-    public void mqttConnect(){
-        String clientId = MqttClient.generateClientId();
-        MqttAndroidClient client =
-                new MqttAndroidClient(this.getApplicationContext(), url,
-                        clientId);
-
-        try {
-            IMqttToken token = client.connect();
-            token.setActionCallback(new IMqttActionListener() {
-                @Override
-                public void onSuccess(IMqttToken asyncActionToken) {
-                    // We are connected
-                    String payload = "the payload";
-                    byte[] encodedPayload = new byte[0];
-                    try {
-                        encodedPayload = payload.getBytes("UTF-8");
-                        MqttMessage message = new MqttMessage(encodedPayload);
-                        client.publish("currentAppointment",message);
-                        Log.d("Mqtt", "onSuccess");
-                    } catch (UnsupportedEncodingException | MqttException e){
-                        System.err.println(e);
-                    }
-                }
-
-                @Override
-                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                    // Something went wrong e.g. connection timeout or firewall problems
-                    Log.d("Mqtt", "onFailure");
-
-                }
-            });
-        } catch (MqttException e) {
-            e.printStackTrace();
-        }
-
-    }
 
     public void onClickLoginButton(View v) {
         String username = usernameEditText.getText().toString();

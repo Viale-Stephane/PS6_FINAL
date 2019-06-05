@@ -13,6 +13,8 @@ import android.widget.TextView;
 import com.example.ps6waitingqueue.activities.NextActivity;
 import com.example.ps6waitingqueue.R;
 import com.example.ps6waitingqueue.models.Appointment;
+import com.example.ps6waitingqueue.services.MqttService;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -20,10 +22,12 @@ public class ListAppointmentsAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private ArrayList<Appointment> appointments;
     private Context context;
+    MqttService mqttService;
     public ListAppointmentsAdapter(Context context, ArrayList<Appointment> appointments){
         this.appointments = appointments;
         mInflater = LayoutInflater.from(context);
         this.context = context;
+        this.mqttService = new MqttService(context);
     }
     @Override
     public int getCount() {
@@ -57,6 +61,7 @@ public class ListAppointmentsAdapter extends BaseAdapter {
             public void onClick(View v) {
                 Intent intent = new Intent(context, NextActivity.class);
                 intent.putExtra("Appointment", appointments.get(position));
+                mqttService.sendGsonObject("currentAppointment",appointments.get(position));
                 context.startActivity(intent);
             }
         });
