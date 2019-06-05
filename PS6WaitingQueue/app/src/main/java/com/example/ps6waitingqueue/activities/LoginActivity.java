@@ -19,6 +19,7 @@ public class LoginActivity extends AppCompatActivity implements UsersListener {
 
     Button loginButton;
     EditText usernameEditText;
+    EditText passwordEditText;
     public static ArrayList<User> usersList;
 
     @Override
@@ -30,13 +31,15 @@ public class LoginActivity extends AppCompatActivity implements UsersListener {
 
         loginButton = findViewById(R.id.loginButton);
         usernameEditText = findViewById(R.id.usernameEditText);
+        passwordEditText = findViewById(R.id.password_input);
     }
 
     public void onClickLoginButton(View v) {
         String username = usernameEditText.getText().toString();
+        String password = passwordEditText.getText().toString();
 
         for (User user : usersList) {
-            if (user.getUsername().equals(username)) {
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
                 Toast.makeText(this, "Vous êtes désormais connecté !", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(getBaseContext(), MainActivity.class);
                 intent.putExtra("username", username);
@@ -44,7 +47,7 @@ public class LoginActivity extends AppCompatActivity implements UsersListener {
                 return;
             }
         }
-        Toast.makeText(this, "Veuillez saisir un bon nom d'utilisateur !", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Veuillez saisir un bon nom d'utilisateur/Mot de passe !", Toast.LENGTH_LONG).show();
     }
 
     @Override
