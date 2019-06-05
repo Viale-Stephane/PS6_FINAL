@@ -28,10 +28,10 @@ import java.io.UnsupportedEncodingException;
  * TODO: Customize class - update intent actions, extra parameters and static
  * helper methods.
  */
-public class MQTTService extends IntentService {
+public class MqttService extends IntentService {
 
-    public MQTTService() {
-        super("MQTTService");
+    public MqttService() {
+        super("MqttService");
     }
 
     @Override
@@ -77,8 +77,8 @@ public class MQTTService extends IntentService {
             @Override
             public void messageArrived(String topic, MqttMessage message) throws Exception {
                 if (topic.equals("users")) {
-                    Log.d("users", new String(message.getPayload()));
-                    Log.d("users", "ça passe sur user");
+                    Log.d("MQTT-users", new String(message.getPayload()));
+                    Log.d("MQTT-users", "ça passe sur user");
 
                     String response = new String(message.getPayload());
                     Gson gson = new Gson();
@@ -86,8 +86,8 @@ public class MQTTService extends IntentService {
                     ((App) getApplication()).getUsers().getUsers().clear();
                     ((App) getApplication()).getUsers().getUsers().addAll(userList.getUsers());
                 } else if (topic.equals("appointments")) {
-                    Log.d("appointments", new String(message.getPayload()));
-                    Log.d("appointments", "ça passe sur appointment");
+                    Log.d("MQTT-appointments", new String(message.getPayload()));
+                    Log.d("MQTT-appointments", "ça passe sur appointment");
 
                     String response = new String(message.getPayload());
                     Gson gson = new Gson();

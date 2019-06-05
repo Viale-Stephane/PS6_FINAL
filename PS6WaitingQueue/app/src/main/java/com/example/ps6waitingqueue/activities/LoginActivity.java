@@ -13,7 +13,7 @@ import com.example.ps6waitingqueue.R;
 import com.example.ps6waitingqueue.models.AppointmentList;
 import com.example.ps6waitingqueue.models.User;
 import com.example.ps6waitingqueue.models.UserList;
-import com.example.ps6waitingqueue.services.MQTTService;
+import com.example.ps6waitingqueue.services.MqttService;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
 
@@ -38,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
             ((App) this.getApplication()).setAppointments(new AppointmentList());
         }
 
-        Intent intent = new Intent(this, MQTTService.class);
+        Intent intent = new Intent(this, MqttService.class);
         startService(intent);
 
         usersList = ((App) this.getApplication()).getUsers().getUsers();

@@ -21,7 +21,7 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
         <service
-            android:name=".services.MQTTService"
+            android:name=".services.MqttService"
             android:exported="false"></service>
 
         <activity
