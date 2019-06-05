@@ -67,6 +67,41 @@ public class MQTTService extends IntentService {
         } catch (MqttException e) {
             e.printStackTrace();
         }
+
+        client.setCallback(new MqttCallback() {
+            @Override
+            public void connectionLost(Throwable cause) {
+
+            }
+
+            @Override
+            public void messageArrived(String topic, MqttMessage message) throws Exception {
+                if (topic.equals("users")) {
+                    Log.d("users", new String(message.getPayload()));
+                    Log.d("users", "ça passe sur user");
+
+                    String response = new String(message.getPayload());
+                    Gson gson = new Gson();
+                    UserList userList = gson.fromJson(response, UserList.class);
+                    ((App) getApplication()).getUsers().getUsers().clear();
+                    ((App) getApplication()).getUsers().getUsers().addAll(userList.getUsers());
+                } else if (topic.equals("appointments")) {
+                    Log.d("appointments", new String(message.getPayload()));
+                    Log.d("appointments", "ça passe sur appointment");
+
+                    String response = new String(message.getPayload());
+                    Gson gson = new Gson();
+                    AppointmentList appointmentList = gson.fromJson(response, AppointmentList.class);
+                    ((App) getApplication()).getAppointments().getAppointments().clear();
+                    ((App) getApplication()).getAppointments().getAppointments().addAll(appointmentList.getAppointments());
+                }
+            }
+
+            @Override
+            public void deliveryComplete(IMqttDeliveryToken token) {
+
+            }
+        });
     }
 
     private void sendMessage(MqttAndroidClient client, String topic, String payload) {
@@ -88,7 +123,7 @@ public class MQTTService extends IntentService {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
                     // The message was published
-                    Log.d("MQTT-Response", "Users Good");
+                    Log.d("MQTT-Subscribe", "Users Good");
                 }
 
                 @Override
@@ -102,28 +137,7 @@ public class MQTTService extends IntentService {
         } catch (MqttException e) {
             e.printStackTrace();
         }
-        client.setCallback(new MqttCallback() {
-            @Override
-            public void connectionLost(Throwable cause) {
 
-            }
-
-            @Override
-            public void messageArrived(String topic, MqttMessage message) throws Exception {
-                if (topic.equals("users")) {
-                    String response = new String(message.getPayload());
-                    Gson gson = new Gson();
-                    UserList userList = gson.fromJson(response, UserList.class);
-                    ((App) getApplication()).getUsers().getUsers().clear();
-                    ((App) getApplication()).getUsers().getUsers().addAll(userList.getUsers());
-                }
-            }
-
-            @Override
-            public void deliveryComplete(IMqttDeliveryToken token) {
-
-            }
-        });
     }
 
     private void subscribeAppointments(MqttAndroidClient client) {
@@ -134,7 +148,7 @@ public class MQTTService extends IntentService {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
                     // The message was published
-                    Log.d("MQTT-Response", "Appointments Good");
+                    Log.d("MQTT-Subscribe", "Appointments Good");
                 }
 
                 @Override
@@ -148,27 +162,5 @@ public class MQTTService extends IntentService {
         } catch (MqttException e) {
             e.printStackTrace();
         }
-        client.setCallback(new MqttCallback() {
-            @Override
-            public void connectionLost(Throwable cause) {
-
-            }
-
-            @Override
-            public void messageArrived(String topic, MqttMessage message) throws Exception {
-                if (topic.equals("appointments")) {
-                    String response = new String(message.getPayload());
-                    Gson gson = new Gson();
-                    AppointmentList appointmentList = gson.fromJson(response, AppointmentList.class);
-                    ((App) getApplication()).getAppointments().getAppointments().clear();
-                    ((App) getApplication()).getAppointments().getAppointments().addAll(appointmentList.getAppointments());
-                }
-            }
-
-            @Override
-            public void deliveryComplete(IMqttDeliveryToken token) {
-
-            }
-        });
     }
 }
