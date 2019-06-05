@@ -36,7 +36,6 @@ public class FragmentTodayAppointments extends Fragment {
         //setAppointmentsListView();
         appointmentsList = ((App) this.getActivity().getApplication()).getAppointments().getAppointments();
         usersList = ((App) this.getActivity().getApplication()).getUsers().getUsers();
-
         checkPermission();
         return view;
     }

@@ -6,7 +6,9 @@ import android.content.Context;
 import android.util.Log;
 
 import com.example.ps6waitingqueue.App;
+import com.example.ps6waitingqueue.models.Appointment;
 import com.example.ps6waitingqueue.models.AppointmentList;
+import com.example.ps6waitingqueue.models.User;
 import com.example.ps6waitingqueue.models.UserList;
 import com.google.gson.Gson;
 
@@ -18,8 +20,12 @@ import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.json.JSONArray;
 
+import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * An {@link IntentService} subclass for handling asynchronous task requests in
@@ -75,25 +81,24 @@ public class MqttService extends IntentService {
             }
 
             @Override
-            public void messageArrived(String topic, MqttMessage message) throws Exception {
+            public void messageArrived(String topic, MqttMessage message) {
+                Gson gson = new Gson();
                 if (topic.equals("users")) {
-                    Log.d("MQTT-users", new String(message.getPayload()));
-                    Log.d("MQTT-users", "ça passe sur user");
-
                     String response = new String(message.getPayload());
-                    Gson gson = new Gson();
-                    UserList userList = gson.fromJson(response, UserList.class);
+                    User[] userList = gson.fromJson(response, User[].class);
+
+                    ArrayList<User> userArrayList = new ArrayList<>(Arrays.asList(userList));
+
                     ((App) getApplication()).getUsers().getUsers().clear();
-                    ((App) getApplication()).getUsers().getUsers().addAll(userList.getUsers());
+                    ((App) getApplication()).getUsers().getUsers().addAll(userArrayList);
                 } else if (topic.equals("appointments")) {
-                    Log.d("MQTT-appointments", new String(message.getPayload()));
-                    Log.d("MQTT-appointments", "ça passe sur appointment");
-
                     String response = new String(message.getPayload());
-                    Gson gson = new Gson();
-                    AppointmentList appointmentList = gson.fromJson(response, AppointmentList.class);
+                    Appointment[] appointmentsList = gson.fromJson(response, Appointment[].class);
+
+                    ArrayList<Appointment> appointmentArrayList = new ArrayList<>(Arrays.asList(appointmentsList));
+
                     ((App) getApplication()).getAppointments().getAppointments().clear();
-                    ((App) getApplication()).getAppointments().getAppointments().addAll(appointmentList.getAppointments());
+                    ((App) getApplication()).getAppointments().getAppointments().addAll(appointmentArrayList);
                 }
             }
 
