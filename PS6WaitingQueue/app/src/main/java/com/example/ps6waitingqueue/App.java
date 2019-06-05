@@ -7,11 +7,14 @@ import com.example.ps6waitingqueue.models.AppointmentList;
 import com.example.ps6waitingqueue.models.User;
 import com.example.ps6waitingqueue.models.UserList;
 
+import org.eclipse.paho.android.service.MqttAndroidClient;
+
 public class App extends Application {
     private boolean firstTime = true;
     private AppointmentList appointments;
     private UserList users;
     private User currentUser;
+    private MqttAndroidClient client;
 
     public UserList getUsers() {
         return users;
@@ -43,6 +46,14 @@ public class App extends Application {
 
     public void setUsers(UserList users) {
         this.users = users;
+    }
+
+    public MqttAndroidClient getClient() {
+        return client;
+    }
+
+    public void setClient(MqttAndroidClient client) {
+        this.client = client;
     }
 
     @Override

@@ -15,6 +15,8 @@ import com.example.ps6waitingqueue.models.User;
 import com.example.ps6waitingqueue.models.UserList;
 import com.example.ps6waitingqueue.services.MQTTService;
 
+import org.eclipse.paho.android.service.MqttAndroidClient;
+
 import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
@@ -23,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText usernameEditText;
     EditText passwordEditText;
     private ArrayList<User> usersList;
+    private MqttAndroidClient client;
 
 
     @Override
@@ -37,10 +40,6 @@ public class LoginActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, MQTTService.class);
         startService(intent);
-
-        startService(intent);
-
-
 
         usersList = ((App) this.getApplication()).getUsers().getUsers();
 

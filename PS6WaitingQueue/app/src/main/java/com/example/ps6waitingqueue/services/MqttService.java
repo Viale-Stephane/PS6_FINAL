@@ -19,6 +19,8 @@ import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
+import java.io.UnsupportedEncodingException;
+
 /**
  * An {@link IntentService} subclass for handling asynchronous task requests in
  * a service on a separate handler thread.
@@ -39,6 +41,8 @@ public class MQTTService extends IntentService {
                 new MqttAndroidClient(this.getApplicationContext(), "tcp://127.0.0.1:1883",
                         clientId);
 
+        ((App) getApplication()).setClient(client);
+
         try {
             IMqttToken token = client.connect();
             token.setActionCallback(new IMqttActionListener() {
@@ -48,6 +52,8 @@ public class MQTTService extends IntentService {
                     if (client.isConnected()) {
                         subscribeUsers(client);
                         subscribeAppointments(client);
+                        sendMessage(client, "needUsers", "request");
+                        sendMessage(client, "needAppointments", "request");
                         Log.d("MQTT-Client", "Good");
                     }
                 }
@@ -63,6 +69,17 @@ public class MQTTService extends IntentService {
         }
     }
 
+    private void sendMessage(MqttAndroidClient client, String topic, String payload) {
+        byte[] encodedPayload = new byte[0];
+        try {
+            encodedPayload = payload.getBytes("UTF-8");
+            MqttMessage message = new MqttMessage(encodedPayload);
+            client.publish(topic, message);
+        } catch (UnsupportedEncodingException | MqttException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void subscribeUsers(MqttAndroidClient client) {
         int qos = 1;
         try {
@@ -71,16 +88,7 @@ public class MQTTService extends IntentService {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
                     // The message was published
-                    Log.d("MQTT-Response", "Good");
-                    /*try {
-                        String response = new String(asyncActionToken.getResponse().getPayload());
-                        Gson gson = new Gson();
-                        UserList userList = gson.fromJson(response, UserList.class);
-                        ((App) getApplication()).getUsers().getUsers().clear();
-                        ((App) getApplication()).getUsers().getUsers().addAll(userList.getUsers());
-                    } catch (MqttException e) {
-                        e.printStackTrace();
-                    }*/
+                    Log.d("MQTT-Response", "Users Good");
                 }
 
                 @Override
@@ -125,15 +133,8 @@ public class MQTTService extends IntentService {
             subToken.setActionCallback(new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
-                    /*try {
-                        String response = new String(asyncActionToken.getResponse().getPayload());
-                        Gson gson = new Gson();
-                        AppointmentList appointmentList = gson.fromJson(response, AppointmentList.class);
-                        ((App) getApplication()).getAppointments().getAppointments().clear();
-                        ((App) getApplication()).getAppointments().getAppointments().addAll(appointmentList.getAppointments());
-                    } catch (MqttException e) {
-                        e.printStackTrace();
-                    }*/
+                    // The message was published
+                    Log.d("MQTT-Response", "Appointments Good");
                 }
 
                 @Override
