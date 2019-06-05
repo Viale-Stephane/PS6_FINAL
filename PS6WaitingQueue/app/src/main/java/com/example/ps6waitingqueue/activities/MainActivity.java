@@ -28,9 +28,8 @@ import java.util.Timer;
 
 import static com.example.ps6waitingqueue.activities.LoginActivity.usersList;
 
-public class MainActivity extends AppCompatActivity implements UsersListener, AppointmentsListener {
+public class MainActivity extends AppCompatActivity {
 
-    public static ArrayList<Appointment> appointmentsList;
     public static User currentUser;
     public static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 1234;
 
@@ -48,10 +47,7 @@ public class MainActivity extends AppCompatActivity implements UsersListener, Ap
                 }
             }
         }
-        MqttService mqttService = new MqttService(this);
 
-        AppointmentsService.getAppointments(this, this);
-        loadApppointment();
         checkPermission();
 
         ViewPager viewPager = findViewById(R.id.viewpagerappointments);
@@ -59,33 +55,6 @@ public class MainActivity extends AppCompatActivity implements UsersListener, Ap
         viewPager.setAdapter(appointmentsPagerAdapter);
         TabLayout tabLayout = findViewById(R.id.sliding_tabs_appointments);
         tabLayout.setupWithViewPager(viewPager);
-    }
-
-    public void loadApppointment() {
-        Timer timer = new Timer();
-        timer.schedule(new AppointmentsTask(this, this), 0, 2000);
-    }
-
-    @Override
-    public void onRequestUsersSuccess(ArrayList<User> users) {
-        usersList = users;
-    }
-
-    @Override
-    public void onRequestUsersFailure(ArrayList<User> users) {
-        usersList = new ArrayList<>();
-    }
-
-    @Override
-    public void onRequestAppointmentsSuccess(ArrayList<Appointment> appointments) {
-        appointmentsList = appointments;
-        //setAppointmentsListView();
-
-    }
-
-    @Override
-    public void onRequestAppointmentsFailure(ArrayList<Appointment> appointments) {
-        appointmentsList = new ArrayList<>();
     }
 
     public void checkPermission(){
