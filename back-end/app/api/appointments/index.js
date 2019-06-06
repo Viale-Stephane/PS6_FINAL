@@ -5,6 +5,19 @@ const router = new Router();
 
 router.get('/', (req, res) => res.status(200).json(Appointment.get()));
 
+router.get('/:appointmentID', (req, res) => {
+  try {
+    const appointment = Appointment.getById(req.params.appointmentID);
+    res.status(200).json(appointment);
+  } catch (err) {
+    if (err.name === 'ValidationError') {
+      res.status(400).json(err.extra);
+    } else {
+      res.status(500).json(err);
+    }
+  }
+});
+
 router.post('/', (req, res) => {
   try {
     const appointment = Appointment.create(req.body);
