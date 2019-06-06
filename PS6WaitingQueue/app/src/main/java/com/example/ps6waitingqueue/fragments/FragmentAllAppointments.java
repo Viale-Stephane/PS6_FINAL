@@ -34,6 +34,7 @@ public class FragmentAllAppointments extends Fragment implements AppointmentList
         appointmentsList = ((App) this.getActivity().getApplication()).getAppointments().getAppointments();
         Log.d("FragmentAll",appointmentsList.toString());
         usersList = ((App) this.getActivity().getApplication()).getUsers().getUsers();
+        ((App) this.getActivity().getApplication()).getMqttService().addAppointmentListListener(this);
         setAppointmentsListView();
 
         checkPermission();

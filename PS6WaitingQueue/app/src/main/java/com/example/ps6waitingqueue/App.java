@@ -2,10 +2,12 @@ package com.example.ps6waitingqueue;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 
 import com.example.ps6waitingqueue.models.AppointmentList;
 import com.example.ps6waitingqueue.models.User;
 import com.example.ps6waitingqueue.models.UserList;
+import com.example.ps6waitingqueue.services.MqttService;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
 
@@ -14,6 +16,7 @@ public class App extends Application {
     private AppointmentList appointments;
     private UserList users;
     private User currentUser;
+    private MqttService mqttService;
     private MqttAndroidClient client;
 
     public UserList getUsers() {
@@ -54,6 +57,14 @@ public class App extends Application {
 
     public void setClient(MqttAndroidClient client) {
         this.client = client;
+    }
+
+    public MqttService getMqttService() {
+        return mqttService;
+    }
+
+    public void setMqttService(MqttService mqttService) {
+        this.mqttService = mqttService;
     }
 
     @Override

@@ -37,13 +37,17 @@ import java.util.Arrays;
  */
 public class MqttService extends IntentService {
 
-    public MqttService() {
+    private ArrayList<AppointmentListListener> appointmentListListeners = new ArrayList<>();
 
+    public MqttService() {
         super("MqttService");
     }
 
     @Override
     protected void onHandleIntent(Intent intent) {
+        ((App) this.getApplication()).setMqttService(this);
+
+
         String clientId = MqttClient.generateClientId();
         MqttAndroidClient client =
                 new MqttAndroidClient(this.getApplicationContext(), "tcp://127.0.0.1:1883", //adresse broker local
@@ -100,6 +104,7 @@ public class MqttService extends IntentService {
 
                     ((App) getApplication()).getAppointments().getAppointments().clear();
                     ((App) getApplication()).getAppointments().getAppointments().addAll(appointmentArrayList);
+                    fireNewAppointmentList(appointmentArrayList);
                 }
             }
 
@@ -167,6 +172,16 @@ public class MqttService extends IntentService {
             });
         } catch (MqttException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void addAppointmentListListener(AppointmentListListener appointmentListListener) {
+        this.appointmentListListeners.add(appointmentListListener);
+    }
+
+    private void fireNewAppointmentList(ArrayList<Appointment> appointments) {
+        for (AppointmentListListener appointmentListListener : this.appointmentListListeners) {
+            appointmentListListener.appointmentListUpdated(appointments);
         }
     }
 }

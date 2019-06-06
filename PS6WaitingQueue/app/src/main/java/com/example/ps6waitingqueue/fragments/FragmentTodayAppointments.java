@@ -37,6 +37,7 @@ public class FragmentTodayAppointments extends Fragment implements AppointmentLi
         //setAppointmentsListView();
         appointmentsList = ((App) this.getActivity().getApplication()).getAppointments().getAppointments();
         usersList = ((App) this.getActivity().getApplication()).getUsers().getUsers();
+        ((App) this.getActivity().getApplication()).getMqttService().addAppointmentListListener(this);
         setAppointmentsListView();
         checkPermission();
         return view;

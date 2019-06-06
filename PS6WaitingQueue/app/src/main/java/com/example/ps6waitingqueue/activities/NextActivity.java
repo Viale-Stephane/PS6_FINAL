@@ -106,9 +106,9 @@ public class NextActivity extends AppCompatActivity {
                 }
 
                 // TODO : AppointmentsService.deleteAppointment(appointment.getId());
-                //onBackPressed();
-                Intent intent = new Intent(this,MainActivity.class);
-                startActivity(intent);
+                onBackPressed();
+                //Intent intent = new Intent(this,MainActivity.class);
+                //startActivity(intent);
                 // quitter la page retour aux rdv & fermer le rdv
             }
         });
