@@ -14,6 +14,7 @@ import android.widget.ListView;
 import com.example.ps6waitingqueue.App;
 import com.example.ps6waitingqueue.R;
 import com.example.ps6waitingqueue.adapters.ListAppointmentsAdapter;
+import com.example.ps6waitingqueue.listener.AppointmentListListener;
 import com.example.ps6waitingqueue.models.Appointment;
 import com.example.ps6waitingqueue.models.User;
 
@@ -23,7 +24,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 
-public class FragmentTodayAppointments extends Fragment {
+public class FragmentTodayAppointments extends Fragment implements AppointmentListListener {
     private ListView listView;
     private ArrayList<Appointment> appointmentsList;
     private ArrayList<User> usersList;
@@ -85,5 +86,10 @@ public class FragmentTodayAppointments extends Fragment {
     public boolean checkParseDate(String initDate, String todayDay,String todayMonth){
         String[] parts = initDate.split("-");
         return ((parts[2].substring(0,2)).equals(todayDay) && parts[1].equals(todayMonth));
+    }
+
+    @Override
+    public void appointmentListUpdated(ArrayList<Appointment> appointments) {
+        setAppointmentsListView();
     }
 }

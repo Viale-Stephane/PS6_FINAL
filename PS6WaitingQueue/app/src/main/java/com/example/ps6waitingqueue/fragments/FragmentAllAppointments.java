@@ -15,12 +15,13 @@ import android.widget.ListView;
 import com.example.ps6waitingqueue.App;
 import com.example.ps6waitingqueue.R;
 import com.example.ps6waitingqueue.adapters.ListAppointmentsAdapter;
+import com.example.ps6waitingqueue.listener.AppointmentListListener;
 import com.example.ps6waitingqueue.models.Appointment;
 import com.example.ps6waitingqueue.models.User;
 
 import java.util.ArrayList;
 
-public class FragmentAllAppointments extends Fragment {
+public class FragmentAllAppointments extends Fragment implements AppointmentListListener {
     private ListView listView;
     public ArrayList<Appointment> appointmentsList;
     public ArrayList<User> usersList;
@@ -72,5 +73,10 @@ public class FragmentAllAppointments extends Fragment {
                     new String[]{Manifest.permission.SEND_SMS},
                     MY_PERMISSIONS_REQUEST_SEND_SMS);
         }
+    }
+
+    @Override
+    public void appointmentListUpdated(ArrayList<Appointment> appointments) {
+        setAppointmentsListView();
     }
 }

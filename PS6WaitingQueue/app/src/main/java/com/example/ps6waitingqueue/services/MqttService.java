@@ -6,6 +6,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.example.ps6waitingqueue.App;
+import com.example.ps6waitingqueue.listener.AppointmentListListener;
 import com.example.ps6waitingqueue.models.Appointment;
 import com.example.ps6waitingqueue.models.AppointmentList;
 import com.example.ps6waitingqueue.models.User;
@@ -35,6 +36,8 @@ import java.util.Arrays;
  * helper methods.
  */
 public class MqttService extends IntentService {
+
+    private AppointmentListListener appointmentListListener;
 
     public MqttService() {
         super("MqttService");
@@ -98,6 +101,7 @@ public class MqttService extends IntentService {
 
                     ((App) getApplication()).getAppointments().getAppointments().clear();
                     ((App) getApplication()).getAppointments().getAppointments().addAll(appointmentArrayList);
+                    appointmentListListener.appointmentListUpdated(appointmentArrayList);
                 }
             }
 
