@@ -39,6 +39,16 @@ public class FragmentAllAppointments extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        appointmentsList = ((App) this.getActivity().getApplication()).getAppointments().getAppointments();
+        Log.d("FragmentAllResume",appointmentsList.toString());
+        setAppointmentsListView();
+
+
+    }
+
     public ArrayList<Appointment> filterTeacher(ArrayList<Appointment> appointments) {
         ArrayList<Appointment> toReturn = new ArrayList<>();
         for(Appointment appointment : appointments){

@@ -14,6 +14,10 @@ import com.example.ps6waitingqueue.R;
 import com.example.ps6waitingqueue.models.Appointment;
 import com.example.ps6waitingqueue.models.User;
 
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
+
+import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 
 public class NextActivity extends AppCompatActivity {
@@ -90,6 +94,16 @@ public class NextActivity extends AppCompatActivity {
                     nextButton.setBackgroundResource(R.drawable.circle_button_red);
                 }
             } else {
+                String payload = String.valueOf(appointment.getId());
+                byte[] encodedPayload = new byte[0];
+                try {
+                    encodedPayload = payload.getBytes("UTF-8");
+                    MqttMessage message = new MqttMessage(encodedPayload);
+                    ((App) this.getApplication()).getClient().publish("deleteAppointment", message);
+                } catch (UnsupportedEncodingException | MqttException e) {
+                    e.printStackTrace();
+                }
+
                 // TODO : AppointmentsService.deleteAppointment(appointment.getId());
                 onBackPressed();
                 // quitter la page retour aux rdv & fermer le rdv

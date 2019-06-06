@@ -44,7 +44,7 @@ public class MqttService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         String clientId = MqttClient.generateClientId();
         MqttAndroidClient client =
-                new MqttAndroidClient(this.getApplicationContext(), "tcp://127.0.0.1:1883",
+                new MqttAndroidClient(this.getApplicationContext(), "tcp://127.0.0.1:1883", //adresse broker local
                         clientId);
 
         ((App) getApplication()).setClient(client);
@@ -58,8 +58,7 @@ public class MqttService extends IntentService {
                     if (client.isConnected()) {
                         subscribeUsers(client);
                         subscribeAppointments(client);
-                        sendMessage(client, "needUsers", "request");
-                        sendMessage(client, "needAppointments", "request");
+                        sendMessage(client, "newConnection", "I'm connected");
                         Log.d("MQTT-Client", "Good");
                     }
                 }
@@ -109,7 +108,7 @@ public class MqttService extends IntentService {
         });
     }
 
-    private void sendMessage(MqttAndroidClient client, String topic, String payload) {
+    public void sendMessage(MqttAndroidClient client, String topic, String payload) {
         byte[] encodedPayload = new byte[0];
         try {
             encodedPayload = payload.getBytes("UTF-8");
