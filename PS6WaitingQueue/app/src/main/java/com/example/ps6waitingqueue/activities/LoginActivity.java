@@ -54,14 +54,16 @@ public class LoginActivity extends AppCompatActivity {
         String password = passwordEditText.getText().toString();
 
         for (User user : usersList) {
-            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-                Toast.makeText(this, "Vous êtes désormais connecté !", Toast.LENGTH_LONG).show();
+            if (user.getUsername() != null) {
+                if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                    Toast.makeText(this, "Vous êtes désormais connecté !", Toast.LENGTH_LONG).show();
 
-                ((App) this.getApplication()).setCurrentUser(user);
+                    ((App) this.getApplication()).setCurrentUser(user);
 
-                Intent intent = new Intent(getBaseContext(), MainActivity.class);
-                startActivity(intent);
-                return;
+                    Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                    startActivity(intent);
+                    return;
+                }
             }
         }
         Toast.makeText(this, "Veuillez saisir un bon nom d'utilisateur/Mot de passe !", Toast.LENGTH_LONG).show();

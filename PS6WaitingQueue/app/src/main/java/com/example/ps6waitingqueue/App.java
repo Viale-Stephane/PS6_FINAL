@@ -16,8 +16,32 @@ public class App extends Application {
     private AppointmentList appointments;
     private UserList users;
     private User currentUser;
+    private User inRoomCurrentUser;
+    private User inRoomNextUser;
     private MqttService mqttService;
     private MqttAndroidClient client;
+    private int numberOfStudentLeft;
+
+    public int getNumberOfStudentLeft(){
+        return numberOfStudentLeft;
+    }
+
+    public void setNumberOfStudentLeft(int n){
+        this.numberOfStudentLeft = n;
+    }
+
+    public User getInRoomCurrentUser(){
+        return inRoomCurrentUser;
+    }
+    public void setInRoomCurrentUser(User user){
+        inRoomCurrentUser = user;
+    }
+    public User getInRoomNextUser(){
+        return inRoomNextUser;
+    }
+    public void setInRoomNextUser(User user){
+        inRoomCurrentUser = user;
+    }
 
     public UserList getUsers() {
         return users;

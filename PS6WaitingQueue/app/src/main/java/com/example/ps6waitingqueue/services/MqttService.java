@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.example.ps6waitingqueue.App;
 import com.example.ps6waitingqueue.listener.AppointmentListListener;
+import com.example.ps6waitingqueue.listener.InRoomUserListener;
 import com.example.ps6waitingqueue.models.Appointment;
 import com.example.ps6waitingqueue.models.AppointmentList;
 import com.example.ps6waitingqueue.models.User;
@@ -38,6 +39,7 @@ import java.util.Arrays;
 public class MqttService extends IntentService {
 
     private ArrayList<AppointmentListListener> appointmentListListeners = new ArrayList<>();
+    private ArrayList<InRoomUserListener> inRoomUserListeners = new ArrayList<>();
 
     public MqttService() {
         super("MqttService");
@@ -64,6 +66,9 @@ public class MqttService extends IntentService {
                     if (client.isConnected()) {
                         subscribeUsers(client);
                         subscribeAppointments(client);
+                        subscribeInRoomCurrentUser(client);
+                        subscribeInRoomNextUser(client);
+                        subscribeUserLeft(client);
                         sendMessage(client, "newConnection", "I'm connected");
                         Log.d("MQTT-Client", "Good");
                     }
@@ -105,6 +110,37 @@ public class MqttService extends IntentService {
                     ((App) getApplication()).getAppointments().getAppointments().clear();
                     ((App) getApplication()).getAppointments().getAppointments().addAll(appointmentArrayList);
                     fireNewAppointmentList(appointmentArrayList);
+
+                } else if (topic.equals("inRoomCurrentUser")) {
+                    Log.d("inRoomCurrentUser", "new msg in topic");
+                    String response = new String(message.getPayload());
+                    Log.d("User",response);
+
+                    User inRoomCurrentUser = gson.fromJson(response, User.class);
+
+                    Log.d("User",inRoomCurrentUser.getUsername());
+                    ((App)getApplication()).setInRoomCurrentUser(inRoomCurrentUser);
+                    fireNewInRoomCurrentUser(inRoomCurrentUser);
+
+                } else if (topic.equals("inRoomNextUser")) {
+                    Log.d("inRoomNextUser", "new msg in topic");
+                    String response = new String(message.getPayload());
+                    Log.d("User",response);
+
+                    User inRoomNextUser = gson.fromJson(response, User.class);
+
+                    Log.d("User",inRoomNextUser.getUsername());
+                    ((App)getApplication()).setInRoomCurrentUser(inRoomNextUser);
+                    fireNewInRoomNextUser(inRoomNextUser);
+                } else if (topic.equals("userLeft")) {
+                    Log.d("inRoomNextUser", "new msg in topic");
+                    String response = new String(message.getPayload());
+                    Log.d("User",response);
+
+                    int usersLeft = gson.fromJson(response, Integer.class);
+
+                    ((App)getApplication()).setNumberOfStudentLeft(usersLeft);
+                    fireUserLeftInRoom(usersLeft);
                 }
             }
 
@@ -148,9 +184,30 @@ public class MqttService extends IntentService {
         } catch (MqttException e) {
             e.printStackTrace();
         }
-
     }
+    private void subscribeUserLeft(MqttAndroidClient client) {
+        int qos = 1;
+        try {
+            IMqttToken subToken = client.subscribe("userLeft", qos);
+            subToken.setActionCallback(new IMqttActionListener() {
+                @Override
+                public void onSuccess(IMqttToken asyncActionToken) {
+                    // The message was published
+                    Log.d("MQTT-Subscribe", "Users Good");
+                }
 
+                @Override
+                public void onFailure(IMqttToken asyncActionToken,
+                                      Throwable exception) {
+                    // The subscription could not be performed, maybe the user was not
+                    // authorized to subscribe on the specified topic e.g. using wildcards
+
+                }
+            });
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+    }
     private void subscribeAppointments(MqttAndroidClient client) {
         int qos = 1;
         try {
@@ -174,14 +231,80 @@ public class MqttService extends IntentService {
             e.printStackTrace();
         }
     }
+    private void subscribeInRoomCurrentUser(MqttAndroidClient client) {
+        int qos = 1;
+        try {
+            IMqttToken subToken = client.subscribe("inRoomCurrentUser", qos);
+            subToken.setActionCallback(new IMqttActionListener() {
+                @Override
+                public void onSuccess(IMqttToken asyncActionToken) {
+                    // The message was published
+                    Log.d("MQTT-Subscribe", "inRoomCurrentUser Good");
+                }
+
+                @Override
+                public void onFailure(IMqttToken asyncActionToken,
+                                      Throwable exception) {
+                    // The subscription could not be performed, maybe the user was not
+                    // authorized to subscribe on the specified topic e.g. using wildcards
+
+                }
+            });
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+    }
+    private void subscribeInRoomNextUser(MqttAndroidClient client) {
+        int qos = 1;
+        try {
+            IMqttToken subToken = client.subscribe("inRoomNextUser", qos);
+            subToken.setActionCallback(new IMqttActionListener() {
+                @Override
+                public void onSuccess(IMqttToken asyncActionToken) {
+                    // The message was published
+                    Log.d("MQTT-Subscribe", "inRoomNextUser Good");
+                }
+
+                @Override
+                public void onFailure(IMqttToken asyncActionToken,
+                                      Throwable exception) {
+                    // The subscription could not be performed, maybe the user was not
+                    // authorized to subscribe on the specified topic e.g. using wildcards
+
+                }
+            });
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void addAppointmentListListener(AppointmentListListener appointmentListListener) {
         this.appointmentListListeners.add(appointmentListListener);
     }
 
+    public void addUserRoomListener(InRoomUserListener inRoomUserListener) {
+        this.inRoomUserListeners.add(inRoomUserListener);
+    }
+
     private void fireNewAppointmentList(ArrayList<Appointment> appointments) {
         for (AppointmentListListener appointmentListListener : this.appointmentListListeners) {
             appointmentListListener.appointmentListUpdated(appointments);
+        }
+    }
+    private void fireNewInRoomCurrentUser(User inRoomCurrentUser) {
+        for (InRoomUserListener inRoomUserListener : this.inRoomUserListeners) {
+            inRoomUserListener.inRoomCurrentUserUpdated(inRoomCurrentUser);
+        }
+    }
+    private void fireNewInRoomNextUser(User inRoomNextUser) {
+        for (InRoomUserListener inRoomUserListener : this.inRoomUserListeners) {
+            inRoomUserListener.inRoomNextUserUpdated(inRoomNextUser);
+        }
+    }
+
+    private void fireUserLeftInRoom(int left) {
+        for (InRoomUserListener inRoomUserListener : this.inRoomUserListeners) {
+            inRoomUserListener.inRoomUsersLeft(left);
         }
     }
 }
