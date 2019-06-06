@@ -144,7 +144,8 @@ public class NextActivity extends AppCompatActivity implements InRoomUserListene
 
     @Override
     public void inRoomTimeLeft(int i) {
-        timePerAppointment.setText(LocalTime.MIN.plus(Duration.ofMinutes(i)).toString());
+        Log.d("tomeleft", String.valueOf(i));
+        timePerAppointment.setText("Temps restant :" + LocalTime.MIN.plus(Duration.ofMinutes(i)).toString());
     }
 }
 
