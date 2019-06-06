@@ -67,6 +67,10 @@ public class App extends Application {
         this.mqttService = mqttService;
     }
 
+    public void sendMessage(String topic, String message) {
+        this.mqttService.sendMessage(this.client, topic, message);
+    }
+
     @Override
     public Context getApplicationContext() {
         return super.getApplicationContext();
