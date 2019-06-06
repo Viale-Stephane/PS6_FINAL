@@ -1,8 +1,12 @@
 package com.example.ps6waitingqueue.services;
 
+import android.Manifest;
 import android.app.IntentService;
 import android.content.Intent;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.support.v4.content.ContextCompat;
+import android.telephony.SmsManager;
 import android.util.Log;
 
 import com.example.ps6waitingqueue.App;
@@ -10,6 +14,7 @@ import com.example.ps6waitingqueue.listener.AppointmentListListener;
 import com.example.ps6waitingqueue.listener.InRoomUserListener;
 import com.example.ps6waitingqueue.models.Appointment;
 import com.example.ps6waitingqueue.models.AppointmentList;
+import com.example.ps6waitingqueue.models.Sms;
 import com.example.ps6waitingqueue.models.User;
 import com.example.ps6waitingqueue.models.UserList;
 import com.google.gson.Gson;
@@ -69,6 +74,8 @@ public class MqttService extends IntentService {
                         subscribeInRoomCurrentUser(client);
                         subscribeInRoomNextUser(client);
                         subscribeUserLeft(client);
+                        subscribeInRoomTimeLeft(client);
+                        subscribeSMS(client);
                         sendMessage(client, "newConnection", "I'm connected");
                         Log.d("MQTT-Client", "Good");
                     }
@@ -146,10 +153,17 @@ public class MqttService extends IntentService {
                     String response = new String(message.getPayload());
                     Log.d("inRoomTimeLeft",response);
 
-                    int usersLeft = gson.fromJson(response, Integer.class);
+                    int timeLeft = gson.fromJson(response, Integer.class);
 
-                    ((App)getApplication()).setNumberOfStudentLeft(usersLeft);
-                    fireUserLeftInRoom(usersLeft);
+                    fireTimeLeftInRoom(timeLeft);
+                }else if (topic.equals("sms")) {
+                    Log.d("sms", "new msg in topic");
+                    String response = new String(message.getPayload());
+                    Log.d("sms",response);
+
+                    Sms sms = gson.fromJson(response, Sms.class);
+
+                    fireSendSMS(sms);
                 }
             }
 
@@ -311,6 +325,30 @@ public class MqttService extends IntentService {
         }
     }
 
+    private void subscribeSMS(MqttAndroidClient client) {
+        int qos = 1;
+        try {
+            IMqttToken subToken = client.subscribe("sms", qos);
+            subToken.setActionCallback(new IMqttActionListener() {
+                @Override
+                public void onSuccess(IMqttToken asyncActionToken) {
+                    // The message was published
+                    Log.d("MQTT-Subscribe", "SMS Good");
+                }
+
+                @Override
+                public void onFailure(IMqttToken asyncActionToken,
+                                      Throwable exception) {
+                    // The subscription could not be performed, maybe the user was not
+                    // authorized to subscribe on the specified topic e.g. using wildcards
+
+                }
+            });
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void addAppointmentListListener(AppointmentListListener appointmentListListener) {
         this.appointmentListListeners.add(appointmentListListener);
     }
@@ -339,9 +377,14 @@ public class MqttService extends IntentService {
             inRoomUserListener.inRoomUsersLeft(left);
         }
     }
-    private void firTimeLeftInRoom(int timeleft) {
+    private void fireTimeLeftInRoom(int timeleft) {
         for (InRoomUserListener inRoomUserListener : this.inRoomUserListeners) {
             inRoomUserListener.inRoomTimeLeft(timeleft);
+        }
+    }
+    private void fireSendSMS(Sms sms) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
+            SmsManager.getDefault().sendTextMessage(sms.getTel(), null, sms.getMessage(), null, null);
         }
     }
 }
