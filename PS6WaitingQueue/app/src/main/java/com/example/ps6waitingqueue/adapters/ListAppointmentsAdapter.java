@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ps6waitingqueue.activities.NextActivity;
 import com.example.ps6waitingqueue.R;
@@ -55,9 +56,14 @@ public class ListAppointmentsAdapter extends BaseAdapter {
         name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, NextActivity.class);
-                intent.putExtra("Appointment", appointments.get(position));
-                context.startActivity(intent);
+                if(appointments.get(position).getStudentsID().size() >= 1) {
+                    Intent intent = new Intent(context, NextActivity.class);
+                    intent.putExtra("Appointment", appointments.get(position));
+
+                    context.startActivity(intent);
+                }else{
+                    Toast.makeText(v.getContext(), "Il n'y a pas d'étudiant inscrit", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         return layout;
