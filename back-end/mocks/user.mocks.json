@@ -1,5 +1,12 @@
 [
   {
+    "username": "nobody",
+    "passworc": "nobody",
+    "professor": true,
+    "id": -1,
+    "phoneNumber": "noPhoneNumber"
+  },
+  {
     "username": "AnneMarie",
     "password": "test",
     "professor": true,
