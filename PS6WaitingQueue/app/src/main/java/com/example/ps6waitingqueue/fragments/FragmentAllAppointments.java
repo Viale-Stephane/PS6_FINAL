@@ -77,6 +77,8 @@ public class FragmentAllAppointments extends Fragment implements AppointmentList
 
     @Override
     public void appointmentListUpdated(ArrayList<Appointment> appointments) {
+        appointmentsList = appointments;
+        Log.d("FragmentListener",appointmentsList.toString());
         setAppointmentsListView();
     }
 }

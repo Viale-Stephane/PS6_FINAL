@@ -1,6 +1,7 @@
 package com.example.ps6waitingqueue.activities;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -105,7 +106,9 @@ public class NextActivity extends AppCompatActivity {
                 }
 
                 // TODO : AppointmentsService.deleteAppointment(appointment.getId());
-                onBackPressed();
+                //onBackPressed();
+                Intent intent = new Intent(this,MainActivity.class);
+                startActivity(intent);
                 // quitter la page retour aux rdv & fermer le rdv
             }
         });

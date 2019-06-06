@@ -37,9 +37,8 @@ import java.util.Arrays;
  */
 public class MqttService extends IntentService {
 
-    private AppointmentListListener appointmentListListener;
-
     public MqttService() {
+
         super("MqttService");
     }
 
@@ -101,7 +100,6 @@ public class MqttService extends IntentService {
 
                     ((App) getApplication()).getAppointments().getAppointments().clear();
                     ((App) getApplication()).getAppointments().getAppointments().addAll(appointmentArrayList);
-                    appointmentListListener.appointmentListUpdated(appointmentArrayList);
                 }
             }
 

@@ -90,6 +90,7 @@ public class FragmentTodayAppointments extends Fragment implements AppointmentLi
 
     @Override
     public void appointmentListUpdated(ArrayList<Appointment> appointments) {
+        appointmentsList = appointments;
         setAppointmentsListView();
     }
 }
