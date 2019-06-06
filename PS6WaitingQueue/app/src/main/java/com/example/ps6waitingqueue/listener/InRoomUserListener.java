@@ -6,5 +6,6 @@ public interface InRoomUserListener {
     void inRoomCurrentUserUpdated(User user);
     void inRoomNextUserUpdated(User user);
     void inRoomUsersLeft(int i);
+    void inRoomTimeLeft(int i);
 
 }

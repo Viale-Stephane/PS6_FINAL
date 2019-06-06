@@ -114,18 +114,18 @@ public class MqttService extends IntentService {
                 } else if (topic.equals("inRoomCurrentUser")) {
                     Log.d("inRoomCurrentUser", "new msg in topic");
                     String response = new String(message.getPayload());
-                    Log.d("User",response);
+                    Log.d("inRoomCurrentUser",response);
 
                     User inRoomCurrentUser = gson.fromJson(response, User.class);
 
-                    Log.d("User",inRoomCurrentUser.getUsername());
+                    Log.d("inRoomCurrentUser",inRoomCurrentUser.getUsername());
                     ((App)getApplication()).setInRoomCurrentUser(inRoomCurrentUser);
                     fireNewInRoomCurrentUser(inRoomCurrentUser);
 
                 } else if (topic.equals("inRoomNextUser")) {
                     Log.d("inRoomNextUser", "new msg in topic");
                     String response = new String(message.getPayload());
-                    Log.d("User",response);
+                    Log.d("inRoomNextUser",response);
 
                     User inRoomNextUser = gson.fromJson(response, User.class);
 
@@ -135,7 +135,16 @@ public class MqttService extends IntentService {
                 } else if (topic.equals("userLeft")) {
                     Log.d("inRoomNextUser", "new msg in topic");
                     String response = new String(message.getPayload());
-                    Log.d("User",response);
+                    Log.d("inRoomNextUser",response);
+
+                    int usersLeft = gson.fromJson(response, Integer.class);
+
+                    ((App)getApplication()).setNumberOfStudentLeft(usersLeft);
+                    fireUserLeftInRoom(usersLeft);
+                } else if (topic.equals("inRoomTimeLeft")) {
+                    Log.d("inRoomTimeLeft", "new msg in topic");
+                    String response = new String(message.getPayload());
+                    Log.d("inRoomTimeLeft",response);
 
                     int usersLeft = gson.fromJson(response, Integer.class);
 
@@ -278,6 +287,30 @@ public class MqttService extends IntentService {
         }
     }
 
+    private void subscribeInRoomTimeLeft(MqttAndroidClient client) {
+        int qos = 1;
+        try {
+            IMqttToken subToken = client.subscribe("inRoomTimeLeft", qos);
+            subToken.setActionCallback(new IMqttActionListener() {
+                @Override
+                public void onSuccess(IMqttToken asyncActionToken) {
+                    // The message was published
+                    Log.d("MQTT-Subscribe", "inRoomTimeLeft Good");
+                }
+
+                @Override
+                public void onFailure(IMqttToken asyncActionToken,
+                                      Throwable exception) {
+                    // The subscription could not be performed, maybe the user was not
+                    // authorized to subscribe on the specified topic e.g. using wildcards
+
+                }
+            });
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void addAppointmentListListener(AppointmentListListener appointmentListListener) {
         this.appointmentListListeners.add(appointmentListListener);
     }
@@ -301,10 +334,14 @@ public class MqttService extends IntentService {
             inRoomUserListener.inRoomNextUserUpdated(inRoomNextUser);
         }
     }
-
     private void fireUserLeftInRoom(int left) {
         for (InRoomUserListener inRoomUserListener : this.inRoomUserListeners) {
             inRoomUserListener.inRoomUsersLeft(left);
+        }
+    }
+    private void firTimeLeftInRoom(int timeleft) {
+        for (InRoomUserListener inRoomUserListener : this.inRoomUserListeners) {
+            inRoomUserListener.inRoomTimeLeft(timeleft);
         }
     }
 }

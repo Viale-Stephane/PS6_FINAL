@@ -21,6 +21,8 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 import java.io.UnsupportedEncodingException;
+import java.time.Duration;
+import java.time.LocalTime;
 import java.util.Calendar;
 
 public class NextActivity extends AppCompatActivity implements InRoomUserListener {
@@ -138,6 +140,11 @@ public class NextActivity extends AppCompatActivity implements InRoomUserListene
             this.numberStudentsLeft.setText(numberLeft + i);
         }
 
+    }
+
+    @Override
+    public void inRoomTimeLeft(int i) {
+        timePerAppointment.setText(LocalTime.MIN.plus(Duration.ofMinutes(i)).toString());
     }
 }
 
