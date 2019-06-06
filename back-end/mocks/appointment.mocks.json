@@ -72,5 +72,21 @@
     "teacherID": 1553716028941,
     "studentsID": [],
     "id": 1559652529604
+  },
+  {
+    "title": "Départ Togo et Mali",
+    "desc": "Descriptipn",
+    "places": 10,
+    "date": "2019-06-04T22:00:00.000Z",
+    "startTime": "10:00",
+    "endTime": "12:00",
+    "teacherID": 1553716028941,
+    "studentsID": [
+      1553717759702,
+      1553717979587,
+      1553718502230,
+      1553718562028
+    ],
+    "id": 1559652555215
   }
 ]
