@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +31,9 @@ public class FragmentAllAppointments extends Fragment {
         listView = view.findViewById(R.id.listViewAllAppointments);
         //setAppointmentsListView();
         appointmentsList = ((App) this.getActivity().getApplication()).getAppointments().getAppointments();
+        Log.d("FragmentAll",appointmentsList.toString());
         usersList = ((App) this.getActivity().getApplication()).getUsers().getUsers();
+        setAppointmentsListView();
 
         checkPermission();
         return view;
