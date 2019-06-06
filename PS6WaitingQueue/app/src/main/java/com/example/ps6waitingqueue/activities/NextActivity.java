@@ -81,21 +81,6 @@ public class NextActivity extends AppCompatActivity implements InRoomUserListene
             }
             */
         });
-
-        if(currentUser != null) {
-            String nameCurrent = currentUser.getUsername();
-            currentName.setText(nameCurrent);
-        }
-        if (nextUser != null) {
-            Log.d("nameNext", nextUser.toString());
-            String nameNext = nextUser.getUsername();
-            Log.d("NameNext", nameNext);
-            if (nameNext == null) {
-                nextName.setText(noNewStudent);
-            } else {
-                currentName.setText(nameNext);
-            }
-        }
     }
 
     @Override
@@ -106,19 +91,31 @@ public class NextActivity extends AppCompatActivity implements InRoomUserListene
 
     @Override
     public void inRoomCurrentUserUpdated(User user) {
-        this.currentUser = user;
-        this.currentName.setText(currentStudent + user.getUsername());
+        Log.d("boutonText",String.valueOf(nextButton.getText()));
+        if(nextButton.getText().toString().equals("Commencer")){
+            Log.d("boutonText","Je suis dedans");
+            currentName.setText(noStudent);
+            nextName.setText(nextStudent + user.getUsername());
+            numberStudentsLeft.setText(numberLeft + appointment.getStudentsID().size());
+        }else {
+            this.currentUser = user;
+            this.currentName.setText(currentStudent + user.getUsername());
+        }
 
     }
 
     @Override
     public void inRoomNextUserUpdated(User user) {
-        this.nextUser = user;
-        Log.d("next",user.getUsername());
-        if(user.getUsername().equals("nobody")){
-            this.nextName.setText(noNewStudent);
+        if(nextButton.getText().toString().equals("Commencer")){
+
         }else {
-            this.nextName.setText(nextStudent + user.getUsername());
+            this.nextUser = user;
+            Log.d("next", user.getUsername());
+            if (user.getUsername().equals("nobody")) {
+                this.nextName.setText(noNewStudent);
+            } else {
+                this.nextName.setText(nextStudent + user.getUsername());
+            }
         }
 
     }
