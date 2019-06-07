@@ -52,28 +52,6 @@
     "id": 1557769215940
   },
   {
-    "title": "cours3",
-    "desc": "nhtd",
-    "places": 2,
-    "date": "2019-05-31T22:00:00.000Z",
-    "startTime": "01:01",
-    "endTime": "02:03",
-    "teacherID": 1553716028941,
-    "studentsID": [],
-    "id": 1558422836155
-  },
-  {
-    "title": "Départ Togo et Mali",
-    "desc": "Descriptipn",
-    "places": 10,
-    "date": "2019-06-03T22:00:00.000Z",
-    "startTime": "10:00",
-    "endTime": "12:00",
-    "teacherID": 1553716028941,
-    "studentsID": [],
-    "id": 1559652529604
-  },
-  {
     "title": "Départ Togo et Mali",
     "desc": "Descriptipn",
     "places": 10,
@@ -85,8 +63,77 @@
       1553717759702,
       1553717979587,
       1553718502230,
-      1553718562028
+      1553718562028,
+      1554897038389
     ],
     "id": 1559652555215
+  },
+  {
+    "title": "Départ Chine",
+    "desc": "Réunion",
+    "places": 10,
+    "date": "2019-06-07T22:00:00.000Z",
+    "startTime": "09:10",
+    "endTime": "10:30",
+    "teacherID": 1553716028941,
+    "studentsID": [
+      1554896957969,
+      1554894622906
+    ],
+    "id": 1559890878925
+  },
+  {
+    "title": "Départ Canada",
+    "desc": "Réunion",
+    "places": 3,
+    "date": "2019-06-07T22:00:00.000Z",
+    "startTime": "11:10",
+    "endTime": "11:45",
+    "teacherID": 1553716028941,
+    "studentsID": [
+      1559544515946,
+      1554894622906
+    ],
+    "id": 1559890924703
+  },
+  {
+    "title": "Départ S8",
+    "desc": "Réunion d'information",
+    "places": 3,
+    "date": "2019-06-08T22:00:00.000Z",
+    "startTime": "09:00",
+    "endTime": "10:00",
+    "teacherID": 1553716028941,
+    "studentsID": [
+      1559544515946,
+      1554897038389,
+      1554894622906
+    ],
+    "id": 1559890985566
+  },
+  {
+    "title": "Départ S9",
+    "desc": "Réunion d'information",
+    "places": 3,
+    "date": "2019-09-21T22:00:00.000Z",
+    "startTime": "09:00",
+    "endTime": "12:00",
+    "teacherID": 1553716028941,
+    "studentsID": [],
+    "id": 1559891014677
+  },
+  {
+    "title": "Info Suède",
+    "desc": "Réunion d'information",
+    "places": 5,
+    "date": "2019-06-17T22:00:00.000Z",
+    "startTime": "15:30",
+    "endTime": "16:00",
+    "teacherID": 1553716028941,
+    "studentsID": [
+      1554896957969,
+      1554897038389
+    ],
+    "id": 1559891210918
   }
 ]
