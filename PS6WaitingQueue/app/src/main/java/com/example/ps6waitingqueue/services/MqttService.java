@@ -161,9 +161,9 @@ public class MqttService extends IntentService {
                     String response = new String(message.getPayload());
                     Log.d("sms",response);
 
-                    Sms sms = gson.fromJson(response, Sms.class);
+                    //Sms sms = gson.fromJson(response, Sms.class);
 
-                    fireSendSMS(sms);
+                    fireSendSMS(response);
                 }
             }
 
@@ -382,9 +382,9 @@ public class MqttService extends IntentService {
             inRoomUserListener.inRoomTimeLeft(timeleft);
         }
     }
-    private void fireSendSMS(Sms sms) {
+    private void fireSendSMS(String sms) {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
-            SmsManager.getDefault().sendTextMessage(sms.getTel(), null, sms.getMessage(), null, null);
+            SmsManager.getDefault().sendTextMessage(sms, null, "Mme.Pinna vous attend dans son bureau", null, null);
         }
     }
 }

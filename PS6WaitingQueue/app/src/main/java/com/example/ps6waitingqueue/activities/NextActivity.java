@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.ps6waitingqueue.App;
 import com.example.ps6waitingqueue.R;
 import com.example.ps6waitingqueue.listener.InRoomUserListener;
+import com.example.ps6waitingqueue.listener.SmsListener;
 import com.example.ps6waitingqueue.models.Appointment;
 import com.example.ps6waitingqueue.models.User;
 
@@ -74,14 +75,6 @@ public class NextActivity extends AppCompatActivity implements InRoomUserListene
             ((App)this.getApplication()).sendMessage("nextUser","next");
             nextButton.setBackgroundResource(R.drawable.circle_button_blue);
             nextButton.setText("Suivant");
-            /*
-            if(currentUser!=null) {
-                if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS)
-                        == PackageManager.PERMISSION_GRANTED) {
-                    SmsManager.getDefault().sendTextMessage(currentUser.getPhoneNumber(), null, "Mme.Pinna vous attend dans son bureau.", null, null);
-                }
-            }
-            */
         });
     }
 
@@ -146,9 +139,17 @@ public class NextActivity extends AppCompatActivity implements InRoomUserListene
     public void inRoomTimeLeft(int i) {
         Log.d("tomeleft", String.valueOf(i));
         if (i != 0) {
-            timePerAppointment.setText("Temps restant :" + LocalTime.MIN.plus(Duration.ofMinutes(i)).toString());
+            if(nextButton.getText().toString().equals("Commencer")){
+                timePerAppointment.setText("");
+            }else {
+                timePerAppointment.setText("Temps restant :" + LocalTime.MIN.plus(Duration.ofMinutes(i)).toString());
+            }
         } else {
-            timePerAppointment.setText("Temps écoulé, vous devriez passer à un nouvel étudiant");
+            if(nextButton.getText().toString().equals("Commencer")){
+                timePerAppointment.setText("");
+            }else {
+                timePerAppointment.setText("Temps écoulé, vous devriez passer à un nouvel étudiant");
+            }
         }
     }
 }
